@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sub Bab D: Jaringan Komputer - Bab 5: Pemanfaatan Perangkat Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --navy-primary: #1e3a8a;
+      --navy-secondary: #1e40af;
+      --navy-light: #3b82f6;
+      --navy-accent: #60a5fa;
+      --neutral-dark: #1f2937;
+      --neutral-light: #f8fafc;
+      --neutral-gray: #6b7280;
+      --white: #ffffff;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+      --shadow-3d: 0 25px 50px rgba(30, 58, 138, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--neutral-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* === HEADER === */
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px) saturate(180%);
+      -webkit-backdrop-filter: blur(15px) saturate(180%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    header.scrolled {
+      padding: 12px 40px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: translateY(-2px);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--neutral-gray);
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 10px 18px;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.08), transparent);
+      transition: left 0.6s ease;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      color: var(--navy-primary);
+      background: rgba(30, 58, 138, 0.04);
+    }
+
+    nav a.active {
+      color: var(--white);
+      background: var(--navy-primary);
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    /* === HAMBURGER MENU === */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--navy-primary);
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    .hamburger:hover {
+      background: rgba(30, 58, 138, 0.1);
+    }
+
+    /* Overlay dan close button default hidden */
+    .nav-overlay,
+    .close-menu {
+      display: none;
+    }
+
+    /* === HERO SECTION === */
+    .hero-sub {
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 40px 40px;
+      background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 50%, #dbeafe 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-sub::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.05) 0%, transparent 70%);
+      top: -150px;
+      right: -100px;
+    }
+
+    .hero-sub::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .hero-content-sub {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy-primary);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: rgba(30, 58, 138, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(30, 58, 138, 0.12);
+      transform: translateX(-5px);
+    }
+
+    .subbab-header {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .subbab-header-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 2.2rem;
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+    }
+
+    .subbab-header-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      line-height: 1.1;
+    }
+
+    .subbab-subtitle {
+      font-size: 1.3rem;
+      color: var(--neutral-gray);
+      max-width: 800px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    /* === CONTENT SECTIONS === */
+    .section {
+      padding: 80px 40px;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+      border-radius: 2px;
+    }
+
+    .section-title p {
+      font-size: 1.15rem;
+      color: var(--neutral-gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* === CONTENT CONTAINER === */
+    .content-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* === CONTENT BLOCK === */
+    .content-block {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .content-block:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .content-header {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      padding: 25px 40px;
+      position: relative;
+    }
+
+    .content-header h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .content-body {
+      padding: 40px;
+    }
+
+    .content-text {
+      font-size: 1.1rem;
+      color: var(--neutral-dark);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .content-text:last-child {
+      margin-bottom: 0;
+    }
+
+    /* === IMAGE CONTAINER === */
+    .image-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .content-image {
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-bottom: 15px;
+    }
+
+    .content-image:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-3d);
+    }
+
+    .image-caption {
+      font-style: italic;
+      color: var(--neutral-gray);
+      margin-top: 0px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .text-image-row {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      margin: 30px 0;
+    }
+
+    .text-side {
+      flex: 1;
+    }
+
+    .image-side {
+      flex: 0 0 350px;
+      text-align: center;
+    }
+
+    /* === TABLE STYLES === */
+    .content-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      box-shadow: var(--shadow);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .content-table th {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      font-weight: 600;
+      padding: 18px 20px;
+      text-align: left;
+    }
+
+    .content-table td {
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .content-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .content-table tr:hover {
+      background-color: rgba(30, 58, 138, 0.04);
+    }
+
+    /* === DEVICE GRID === */
+    .device-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 30px 0;
+    }
+
+    .device-category {
+      margin-bottom: 50px;
+    }
+
+    .device-category h4 {
+      font-size: 1.5rem;
+      color: var(--navy-primary);
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--navy-accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .device-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .device-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .device-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .device-card h5 {
+      font-size: 1.3rem;
+      color: var(--neutral-dark);
+      margin-bottom: 15px;
+    }
+
+    .device-image-container {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .device-image {
+      max-width: 100%;
+      max-height: 180px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .device-card:hover .device-image {
+      transform: scale(1.05);
+    }
+
+    /* === ACTIVITY SECTION === */
+    .activity-section {
+      background: linear-gradient(135deg, #f0f5ff, #e6f0ff);
+      padding: 60px 40px;
+      border-radius: 20px;
+      margin: 40px 0;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .activity-title {
+      font-size: 1.6rem;
+      color: var(--navy-primary);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .activity-instructions {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .activity-case {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .case-title {
+      font-size: 1.4rem;
+      color: var(--navy-primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* === LIST STYLES === */
+    .content-list {
+      list-style: none;
+      margin: 25px 0;
+    }
+
+    .content-list li {
+      padding: 12px 0 12px 35px;
+      position: relative;
+      border-bottom: 1px solid rgba(30, 58, 138, 0.05);
+    }
+
+    .content-list li:last-child {
+      border-bottom: none;
+    }
+
+    .content-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 18px;
+      width: 8px;
+      height: 8px;
+      background: var(--navy-light);
+      border-radius: 50%;
+    }
+
+    .content-list strong {
+      color: var(--navy-primary);
+    }
+
+    /* === NAVIGATION BUTTONS === */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 35px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow);
+    }
+
+    .nav-btn-prev {
+      background: var(--white);
+      color: var(--navy-primary);
+      border: 2px solid rgba(30, 58, 138, 0.2);
+    }
+
+    .nav-btn-next {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: var(--white);
+      padding: 60px 40px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.3rem;
+      transition: transform 0.5s ease;
+    }
+
+    .footer-logo:hover .footer-logo-icon {
+      transform: rotateY(180deg);
+    }
+
+    .footer-logo h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .footer-description {
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      transform-style: preserve-3d;
+    }
+
+    .social-link:hover {
+      background: rgba(59, 130, 246, 0.2);
+      color: var(--navy-light);
+      transform: translateY(-5px) translateZ(5px);
+    }
+
+    .footer-column h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: var(--white);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--navy-light);
+      border-radius: 2px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+      transform: translateX(5px);
+    }
+
+    .footer-links a i {
+      font-size: 0.8rem;
+      color: var(--navy-light);
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+      color: #94a3b8;
+    }
+
+    .footer-contact i {
+      color: var(--navy-light);
+      font-size: 1.2rem;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .footer-credit {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .footer-credit i {
+      color: #ef4444;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    .footer-credit strong {
+      color: var(--navy-light);
+      font-weight: 600;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1024px) {
+      .subbab-header-title {
+        font-size: 2.4rem;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .device-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+      }
+      
+      .logo {
+        flex: 1;
+      }
+      
+      .hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 30px 30px;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        overflow-y: auto;
+        gap: 5px;
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 5px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      
+      .logo-text {
+        font-size: 1.1rem;
+      }
+      
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      
+      .hero-sub {
+        padding: 120px 20px 30px;
+      }
+      
+      .section {
+        padding: 60px 20px;
+      }
+      
+      .content-body {
+        padding: 30px 20px;
+      }
+      
+      .nav-buttons {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .nav-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .text-image-row {
+        flex-direction: column;
+      }
+      
+      .image-side {
+        flex: none;
+        width: 100%;
+      }
+      
+      /* Overlay untuk menu mobile */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      /* Close button di dalam menu mobile */
+      .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--navy-primary);
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        z-index: 1001;
+      }
+      
+      .close-menu:hover {
+        background: rgba(30, 58, 138, 0.1);
+      }
+      
+      .subbab-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+      
+      .device-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .subbab-header-title {
+        font-size: 1.8rem;
+      }
+      
+      .subbab-header-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+      }
+      
+      .content-header h3 {
+        font-size: 1.3rem;
+      }
+      
+      .device-card {
+        padding: 20px;
+      }
+      
+      .content-table th,
+      .content-table td {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    .animate-fadeIn {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-network-wired"></i>
+      </div>
+      <div class="logo-text">Bab 5 Pemanfaatan Perangkat Digital</div>
+    </div>
+    
+    <!-- Hamburger Button -->
+    <button class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <nav id="nav-menu">
+      <a href="index.html">Beranda</a>
+      <a href="bab4.html">Bab 4</a>
+      <a href="bab5.html" class="active">Bab 5</a>
+      <a href="ujikompetensi.html">Uji Kompetensi</a>
+      <a href="profilanggi.html">Profil Pengembang</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-sub">
+    <div class="hero-content-sub">
+      
+      <div class="subbab-header">
+        <div class="subbab-header-icon">
+          <i class="fas fa-network-wired"></i>
+        </div>
+        <h1 class="subbab-header-title">Sub Bab D: Jaringan Komputer</h1>
+      </div>
+      
+      <p class="subbab-subtitle">
+        Memahami konsep dasar jaringan komputer, perangkat jaringan, protokol komunikasi, dan mekanisme routing dalam pengiriman data.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="content-container">
+      <!-- Pengantar Jaringan Komputer -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-info-circle"></i> Pengantar: Jaringan Komputer</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Jaringan komputer adalah sebuah arsitektur di mana dua atau lebih komputer terhubung satu sama lain dan digunakan untuk berbagi data. Jaringan komputer dibangun dengan kombinasi <strong>hardware</strong> dan <strong>software</strong>.
+          </p>
+          
+          <p class="content-text">
+            Setiap perangkat yang terhubung pada jaringan komputer akan memiliki identitas unik untuk membedakan perangkat yang disebut alamat IP <strong>(Internet Protocol)</strong>. Berdasarkan pada jangkauan areanya, jaringan komputer dapat dibagi menjadi dua jenis, yaitu jaringan lokal dan jaringan internet.
+          </p>
+          
+          <div class="text-image-row">
+            <div class="text-side">
+              <p class="content-text">
+                <strong>Jaringan lokal</strong> biasanya hanya mencakup area yang terbatas, seperti dalam rumah, sekolah, kampus, atau gedung kantor.
+              </p>
+              <p class="content-text">
+                <strong>Jaringan internet</strong> memiliki jangkauan yang lebih luas bahkan lintas negara, menghubungkan perangkat-perangkat di seluruh dunia.
+              </p>
+            </div>
+            <div class="image-side">
+              <img src="jaringan-komputer-intro.png" alt="Ilustrasi Jaringan Komputer" class="content-image">
+              <p class="image-caption">Ilustrasi Jaringan Komputer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jaringan Lokal (LAN) -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-wifi"></i> 1. Jaringan Lokal (LAN)</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Jaringan lokal adalah jaringan komputer berkabel maupun nirkabel yang menghubungkan komputer dengan perangkat lainnya dalam wilayah terbatas seperti dalam rumah, sekolah, kampus, universitas, atau gedung kantor. Jaringan lokal ini disebut juga sebagai jaringan LAN <strong>(Local Area Network)</strong>.
+          </p>
+          
+          <p class="content-text">
+            Untuk mengakses perangkat pada jaringan lokal, perangkat yang kita miliki harus terhubung terlebih dahulu dengan jaringan lokal tersebut.
+          </p>
+          
+          <div class="image-container">
+            <img src="jaringan-lokal.png" alt="Ilustrasi Jaringan Komputer Lokal" class="content-image">
+            <p class="image-caption">Gambar 5.10 Ilustrasi Jaringan Komputer Lokal</p>
+          </div>
+          
+          <p class="content-text">
+            Dalam level paling sederhana, jaringan lokal hanya terdiri atas dua perangkat yang terhubung menggunakan kabel atau tanpa kabel. Jika ingin menghubungkan lebih dari dua perangkat dalam jaringan yang sama, dibutuhkan perangkat tambahan, yaitu <strong>switch</strong> atau <strong>router</strong>.
+          </p>
+          
+          <div class="device-category">
+            <h4><i class="fas fa-sitemap"></i> Perangkat Jaringan LAN</h4>
+            
+            <div class="device-grid">
+              <!-- Switch -->
+              <div class="device-card">
+                <div class="device-icon">
+                  <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h5>Switch</h5>
+                <p>Switch adalah perangkat keras jaringan yang menghubungkan perangkat di jaringan komputer dengan menggunakan paket switching untuk menerima dan meneruskan data dari suatu perangkat ke perangkat tujuan. Switch hanya dapat menghubungkan perangkat pada jaringan yang sama.</p>
+                <div class="device-image-container">
+                  <img src="switch.jpg" alt="Network Switch" class="device-image">
+                </div>
+                <p class="image-caption">Perangkat switch jaringan</p>
+              </div>
+              
+              <!-- Router -->
+              <div class="device-card">
+                <div class="device-icon">
+                  <i class="fas fa-route"></i>
+                </div>
+                <h5>Router</h5>
+                <p>Router adalah perangkat keras jaringan yang dapat menghubungkan perangkat dari dua jaringan berbeda. Dua jaringan dikatakan berbeda jika mereka memiliki kelompok alamat IP yang berbeda. Router menggunakan tabel routing untuk menentukan jalur terbaik pengiriman data.</p>
+                <div class="device-image-container">
+                  <img src="router.jpg" alt="Network Router" class="device-image">
+                </div>
+                <p class="image-caption">Perangkat router jaringan</p>
+              </div>
+            </div>
+          </div>
+          
+          <p class="content-text">
+            <strong>Perbedaan Switch dan Router:</strong>
+          </p>
+          <ul class="content-list">
+            <li><strong>Switch</strong> hanya dapat menghubungkan perangkat pada jaringan yang sama</li>
+            <li><strong>Router</strong> dapat menghubungkan perangkat dari dua jaringan berbeda</li>
+          </ul>
+          
+          <p class="content-text">
+            Dua jaringan dikatakan berbeda jika mereka memiliki kelompok alamat IP yang berbeda. Misalnya:
+          </p>
+          <ul class="content-list">
+            <li>Perangkat dengan alamat IP <strong>192.168.10.1</strong> dan <strong>192.168.10.2</strong> berada pada jaringan yang sama, yaitu <strong>192.168.10.x</strong></li>
+            <li>Perangkat dengan alamat IP <strong>192.168.10.1</strong> dan <strong>192.168.20.2</strong> berada pada jaringan yang berbeda</li>
+          </ul>
+          
+          <p class="content-text">
+            Switch dan router menggunakan berbagai <strong>protokol</strong> dan algoritma untuk bertukar informasi dan membawa data ke tujuan. Protokol pada jaringan komputer secara sederhana didefinisikan sebagai prosedur atau aturan yang harus ditaati, agar dua buah perangkat dapat berkomunikasi satu sama lain.
+          </p>
+        </div>
+      </div>
+
+      <!-- Jaringan Internet -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-globe"></i> 2. Jaringan Internet</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Internet merupakan singkatan dari <strong>Inter-Network</strong>, merupakan jaringan antar jaringan komputer yang memiliki jangkauan yang lebih luas dibandingkan dengan jaringan lokal. Jaringan internet dapat mencakup area sebuah negara atau bahkan dapat menghubungkan perangkat-perangkat di seluruh dunia.
+          </p>
+          
+          <p class="content-text">
+            Pengertian internet itu sendiri mungkin dapat kita rumuskan sebagai suatu jaringan komunikasi yang menghubungkan satu media elektronik dan media yang lainnya atau kumpulan dari beberapa komputer atau ponsel, yang saling berhubungan serta saling terkoneksi satu sama lain.
+          </p>
+          
+          <p class="content-text">
+            Untuk dapat menggunakan internet secara langsung, biasanya, kalian membutuhkan layanan internet. Layanan internet meliputi:
+          </p>
+          
+          <ul class="content-list">
+            <li>Komunikasi langsung (<strong>email, chat</strong>)</li>
+            <li>Diskusi (<strong>Usenet News, email, milis</strong>)</li>
+            <li>Sumber daya informasi yang terdistribusi (<strong>World Wide Web, Gopher</strong>)</li>
+            <li>Remote login dan lalu lintas file (<strong>Telnet, FTP</strong>)</li>
+            <li>Aneka layanan lainnya</li>
+          </ul>
+          
+          <div class="device-category">
+            <h4><i class="fas fa-project-diagram"></i> Protokol Internet (TCP/IP)</h4>
+            
+            <div class="device-card">
+              <div class="device-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h5>TCP/IP Suite</h5>
+              <p><strong>Transmission Control Protocol / Internet Protocol Suite (TCP/IP)</strong> merupakan standar teknologi pendukung yang dipakai secara global. TCP/IP merupakan protokol pertukaran paket atau Switching Communication Protocol.</p>
+              <p>Istilah "protokol" di internet atau di jaringan lokal mengacu pada satu set aturan yang mengatur bagaimana sebuah aplikasi berkomunikasi dalam suatu jaringan. Software aplikasi yang berjalan di atas sebuah protokol disebut aplikasi <strong>client</strong>.</p>
+              <div class="device-image-container">
+                <img src="tcp-ip.png" alt="TCP/IP Protocol Suite" class="device-image">
+              </div>
+              <p class="image-caption">Model TCP/IP Protocol Suite</p>
+            </div>
+          </div>
+          
+          <p class="content-text">
+            <strong>Syarat agar komputer dapat terhubung dengan internet:</strong>
+          </p>
+          <ul class="content-list">
+            <li>Dukungan <strong>hardware</strong> (modem, router, kartu jaringan)</li>
+            <li>Dukungan <strong>software</strong> (sistem operasi, driver, browser)</li>
+            <li>Terdaftar ke salah satu penyedia jasa internet (<strong>ISP, Internet Service Provider</strong>)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Konfigurasi Jaringan Komputer -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-cogs"></i> 3. Konfigurasi Jaringan Komputer</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Ada dua komponen utama dalam sebuah jaringan komputer, yaitu <strong>node</strong> dan <strong>link</strong>.
+          </p>
+          
+          <div class="text-image-row">
+            <div class="text-side">
+              <p class="content-text">
+                <strong>Node</strong> adalah titik atau perangkat yang dapat menghasilkan input data atau menerima data atau juga kedua-duanya dalam sebuah jaringan. Contoh node pada jaringan ialah perangkat komputer, HP, switch, router, dan lain sebagainya.
+              </p>
+              <p class="content-text">
+                <strong>Link</strong> adalah jalur transmisi data/informasi antar-node. Link ini berupa hubungan antara node yang satu dan node yang lainnya dalam sebuah jaringan. Istilah link kadang juga disebut sebagai <strong>edge</strong>.
+              </p>
+            </div>
+            <div class="image-side">
+              <img src="node-edge.png" alt="Node dan Edge dalam Jaringan" class="content-image">
+              <p class="image-caption">Gambar 5.11 Jaringan Komputer dan Abstraksinya</p>
+            </div>
+          </div>
+          
+          <p class="content-text">
+            Oleh sebab itu, perangkat-perangkat yang saling terhubung melalui jaringan komputer dapat digambarkan secara abstrak sebagai hubungan antara node dan edge. Sebagai ilustrasi, perhatikan bahwa switch digambarkan sebagai node yang terhubung ke beberapa node lainnya, sedangkan komputer/laptop/ponsel merupakan node yang hanya terhubung dengan satu perangkat lainnya. Dalam hal ini, switch berfungsi sebagai node penghubung.
+          </p>
+        </div>
+      </div>
+
+      <!-- Routing pada Jaringan Komputer -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-route"></i> 4. Routing pada Jaringan Komputer</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            <strong>Routing</strong> pada jaringan komputer merupakan sebuah mekanisme pengiriman paket data dari satu perangkat ke perangkat yang lain. Pada sebuah router, biasanya, terdapat sebuah tabel routing atau lebih yang menyimpan informasi jalur routing yang akan dilalui ketika ada pengiriman data yang melewati router dari satu perangkat ke perangkat lainnya.
+          </p>
+          
+          <p class="content-text">
+            Jadi intinya, proses routing adalah proses menentukan jalur yang dilalui sebuah paket data yang dikirim antar-dua buah perangkat. Untuk dapat melakukan proses routing, harus lebih dahulu diketahui alamat tujuan perangkat, alamat asal perangkat, dan rute terbaik. Rute terbaik biasanya merupakan jalur terpendek yang dapat dilalui. Konsep inilah yang dikenal dengan istilah <strong>jalur terpendek</strong>.
+          </p>
+          
+          <div class="image-container">
+            <img src="routing-jaringan.png" alt="Routing pada Jaringan Komputer" class="content-image">
+            <p class="image-caption">Gambar 5.12 Routing pada Jaringan Komputer</p>
+          </div>
+          
+          <p class="content-text">
+            Gambar 5.12 memberikan gambaran untuk lebih memahami tentang routing. Misalnya, kita ingin mengirim data dari komputer B ke komputer D. Jika diperhatikan, setidaknya ada tiga jalur yang dapat dilalui untuk mengirim data. Misal, kalian asumsikan bahwa setiap perangkat saling terhubung dengan kabel sepanjang 1 meter.
+          </p>
+          
+          <table class="content-table">
+            <thead>
+              <tr>
+                <th>Warna Jalur</th>
+                <th>Jalur Yang Dilalui</th>
+                <th>Jarak</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Merah</strong></td>
+                <td>Komputer B → Router 1 → Router 2 → Router 3 → Router 4 → Komputer D</td>
+                <td>5 meter</td>
+              </tr>
+              <tr>
+                <td><strong>Hijau</strong></td>
+                <td>Komputer B → Router 1 → Router 3 → Router 4 → Komputer D</td>
+                <td>4 meter</td>
+              </tr>
+              <tr>
+                <td><strong>Biru</strong></td>
+                <td>Komputer B → Router 1 → Router 4 → Komputer D</td>
+                <td>3 meter</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <p class="content-text">
+            Karena routing selalu mengambil jalur terbaik, ketika kalian mengirimkan data dari Komputer B ke Komputer D, akan melalui jalur dengan garis putus biru. Jalur ini melalui lebih sedikit perangkat lain dan memiliki jarak yang paling pendek dibandingkan dengan jalur lainnya.
+          </p>
+          
+          <div class="activity-case">
+            <h4 class="case-title">
+              <i class="fas fa-question-circle"></i> Pertanyaan Pemahaman
+            </h4>
+            <p class="content-text">
+              <strong>Bagaimana jika dalam sebuah kasus, ternyata ada lebih dari dua jalur terbaik?</strong>
+            </p>
+            <p class="content-text">
+              Jika ada lebih dari dua jalur terbaik yang dapat dilalui, biasanya, router memilih secara acak salah satu dari jalur-jalur terbaik tersebut. Jika jalur routing sangat kompleks, bagaimana cara menemukan jalur terbaik? Untuk menemukan jalur terbaik, dapat menggunakan algoritma <strong>shortest path</strong> (jalur terpendek).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aktivitas Individu -->
+      <div class="activity-section">
+        <h3 class="activity-title">
+          <i class="fas fa-user-check"></i> Aktivitas Individu: Konfigurasi Jaringan Komputer
+        </h3>
+        
+        <div class="activity-instructions">
+          <p class="content-text">
+            <strong>Kode Aktivitas:</strong> PPD-K8-05
+          </p>
+          <p class="content-text">
+            <strong>Instruksi:</strong> Lakukan aktivitas berikut untuk memahami konfigurasi jaringan komputer dan routing.
+          </p>
+        </div>
+        
+        <div class="activity-case">
+          <h4 class="case-title">
+            <i class="fas fa-tasks"></i> Tugas 1: Menggambar Abstraksi Jaringan
+          </h4>
+          <p class="content-text">
+            Gambar ulang abstraksi jaringan komputer pada lembar kerja di bawah ini ke dalam kertas kosong yang kalian miliki!
+          </p>
+          
+          <div class="image-container">
+            <img src="abstraksi-jaringan.png" alt="Abstraksi Jaringan Komputer" class="content-image">
+            <p class="image-caption">Abstraksi Jaringan Komputer</p>
+          </div>
+        </div>
+        
+        <div class="activity-case">
+          <h4 class="case-title">
+            <i class="fas fa-tasks"></i> Tugas 2: Membuat Konfigurasi Jaringan
+          </h4>
+          <p class="content-text">
+            Buatlah konfigurasi jaringan komputer dengan abstraksi yang telah kalian gambar!
+          </p>
+          <p class="content-text">
+            Perhatikan komponen-komponen berikut dalam konfigurasi jaringan Anda:
+          </p>
+          <ul class="content-list">
+            <li><strong>Node:</strong> Komputer, laptop, ponsel, switch, router</li>
+            <li><strong>Link/Edge:</strong> Koneksi antar node</li>
+            <li><strong>IP Address:</strong> Alamat unik untuk setiap perangkat</li>
+            <li><strong>Routing:</strong> Jalur pengiriman data antar perangkat</li>
+          </ul>
+        </div>
+        
+        <div class="activity-case">
+          <h4 class="case-title">
+            <i class="fas fa-tasks"></i> Tugas 3: Identifikasi Jalur Routing
+          </h4>
+          <p class="content-text">
+            Identifikasilah jalur terbaik yang akan dilalui sesuai Gambar 5.12 pada tabel di bawah ini!
+          </p>
+          
+          <table class="content-table">
+            <thead>
+              <tr>
+                <th>Dari</th>
+                <th>Ke</th>
+                <th>Perangkat yang Dilalui</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Komputer A</td>
+                <td>Komputer B</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Komputer A</td>
+                <td>Komputer C</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Komputer A</td>
+                <td>Komputer D</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Komputer B</td>
+                <td>Komputer C</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <p class="content-text" style="margin-top: 20px;">
+            <strong>Petunjuk:</strong> Gunakan konsep shortest path (jalur terpendek) untuk menentukan rute terbaik antar komputer!
+          </p>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="nav-buttons">
+        <a href="bab5-C.html" class="nav-btn nav-btn-prev">
+          <i class="fas fa-arrow-left"></i> Kembali ke Sub Bab C
+        </a>
+        <a href="bab5-E.html" class="nav-btn nav-btn-next">
+          Lanjut ke Sub Bab E <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h3>Bahan Ajar Informatika</h3>
+          </div>
+          <p class="footer-description">
+            Platform pembelajaran digital berbasis Kurikulum Merdeka untuk mata pelajaran Informatika SMP Kelas 8 dengan fokus pada nilai-nilai budaya Nusa Tenggara Timur.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Menu Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+            <li><a href="bab4.html"><i class="fas fa-chevron-right"></i> Bab 4</a></li>
+            <li><a href="bab5.html"><i class="fas fa-chevron-right"></i> Bab 5</a></li>
+            <li><a href="ujikompetensi.html"><i class="fas fa-chevron-right"></i> Uji Kompetensi</a></li>
+            <li><a href="profilanggi.html"><i class="fas fa-chevron-right"></i> Profil Pengembang</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Kontak Pengembang</h4>
+          <ul class="footer-contact">
+            <li>
+              <i class="fas fa-envelope"></i>
+              <div>anggiclementine02@gmail.com</div>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <div>085804629875</div>
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <div>Kupang, Nusa Tenggara Timur</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Bahan Ajar Digital Informatika by Anggi Clementine. All Rights Reserved.</p>
+        <p class="footer-credit">
+          <i class="fas fa-heart"></i> Dikembangkan untuk <strong>Generasi Digital NTT yang Berbudaya</strong>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Hamburger menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('nav-menu');
+      const body = document.body;
+      
+      // Buat overlay element
+      const overlay = document.createElement('div');
+      overlay.className = 'nav-overlay';
+      body.appendChild(overlay);
+      
+      // Buat close button untuk mobile
+      const closeButton = document.createElement('button');
+      closeButton.className = 'close-menu';
+      closeButton.innerHTML = '<i class="fas fa-times"></i>';
+      closeButton.setAttribute('aria-label', 'Tutup menu');
+      navMenu.appendChild(closeButton);
+      
+      // Toggle menu saat hamburger diklik
+      hamburger.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        body.style.overflow = 'hidden';
+      });
+      
+      // Tutup menu saat overlay diklik
+      overlay.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+      });
+      
+      // Tutup menu saat close button diklik
+      closeButton.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+      });
+      
+      // Tutup menu saat link di dalam menu diklik
+      const navLinks = navMenu.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.style.overflow = '';
+        });
+      });
+      
+      // Tutup menu saat window di-resize ke ukuran besar
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.style.overflow = '';
+        }
+      });
+    });
+
+    // Animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeIn');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const animatedElements = document.querySelectorAll('.content-block');
+      animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

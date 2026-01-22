@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sub Bab B: Pengalamatan Memori - Bab 5: Pemanfaatan Perangkat Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --navy-primary: #1e3a8a;
+      --navy-secondary: #1e40af;
+      --navy-light: #3b82f6;
+      --navy-accent: #60a5fa;
+      --neutral-dark: #1f2937;
+      --neutral-light: #f8fafc;
+      --neutral-gray: #6b7280;
+      --white: #ffffff;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+      --shadow-3d: 0 25px 50px rgba(30, 58, 138, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--neutral-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* === HEADER === */
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px) saturate(180%);
+      -webkit-backdrop-filter: blur(15px) saturate(180%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    header.scrolled {
+      padding: 12px 40px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: translateY(-2px);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--neutral-gray);
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 10px 18px;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.08), transparent);
+      transition: left 0.6s ease;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      color: var(--navy-primary);
+      background: rgba(30, 58, 138, 0.04);
+    }
+
+    nav a.active {
+      color: var(--white);
+      background: var(--navy-primary);
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    /* === HAMBURGER MENU === */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--navy-primary);
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    .hamburger:hover {
+      background: rgba(30, 58, 138, 0.1);
+    }
+
+    /* Overlay dan close button default hidden */
+    .nav-overlay,
+    .close-menu {
+      display: none;
+    }
+
+    /* === HERO SECTION === */
+    .hero-sub {
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 40px 40px;
+      background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 50%, #dbeafe 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-sub::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.05) 0%, transparent 70%);
+      top: -150px;
+      right: -100px;
+    }
+
+    .hero-sub::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .hero-content-sub {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy-primary);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: rgba(30, 58, 138, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(30, 58, 138, 0.12);
+      transform: translateX(-5px);
+    }
+
+    .subbab-header {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .subbab-header-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 2.2rem;
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+    }
+
+    .subbab-header-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      line-height: 1.1;
+    }
+
+    .subbab-subtitle {
+      font-size: 1.3rem;
+      color: var(--neutral-gray);
+      max-width: 800px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    /* === CONTENT SECTIONS === */
+    .section {
+      padding: 80px 40px;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+      border-radius: 2px;
+    }
+
+    .section-title p {
+      font-size: 1.15rem;
+      color: var(--neutral-gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* === CONTENT CONTAINER === */
+    .content-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* === CONTENT BLOCK === */
+    .content-block {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .content-block:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .content-header {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      padding: 25px 40px;
+      position: relative;
+    }
+
+    .content-header h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .content-body {
+      padding: 40px;
+    }
+
+    .content-text {
+      font-size: 1.1rem;
+      color: var(--neutral-dark);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .content-text:last-child {
+      margin-bottom: 0;
+    }
+
+    /* === TABLE STYLES === */
+    .memory-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      box-shadow: var(--shadow);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .memory-table th {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      font-weight: 600;
+      padding: 18px 15px;
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .memory-table th:last-child {
+      border-right: none;
+    }
+
+    .memory-table td {
+      padding: 15px;
+      border-bottom: 1px solid rgba(30, 58, 138, 0.1);
+      text-align: center;
+    }
+
+    .memory-table tr:nth-child(even) {
+      background-color: rgba(30, 58, 138, 0.03);
+    }
+
+    .memory-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .memory-table tr:hover {
+      background-color: rgba(30, 58, 138, 0.07);
+    }
+
+    .table-caption {
+      text-align: center;
+      font-style: italic;
+      color: var(--neutral-gray);
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    /* === IMAGE CONTAINER === */
+    .image-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .content-image {  
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-bottom: 15x;
+    }
+
+    .content-image:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-3d);
+    }
+
+    .image-caption {
+      font-style: italic;
+      color: var(--neutral-gray);
+      margin-top: 0px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .text-image-row {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      margin: 30px 0;
+    }
+
+    .text-side {
+      flex: 1;
+    }
+
+    .image-side {
+      flex: 0 0 350px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .text-image-row {
+        flex-direction: column;
+      }
+
+      .image-side {
+        flex: none;
+        width: 100%;
+      }
+    }
+
+    /* === CONVERSION EXAMPLES === */
+    .conversion-example {
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      border-radius: 16px;
+      padding: 25px;
+      margin: 25px 0;
+      border-left: 5px solid var(--navy-primary);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .conversion-example h5 {
+      color: var(--navy-primary);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+    }
+
+    .conversion-steps {
+      margin-left: 20px;
+    }
+
+    .conversion-steps li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .conversion-steps li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--navy-light);
+      font-weight: bold;
+    }
+
+    /* === ACTIVITY SECTION === */
+    .activity-section {
+      background: linear-gradient(135deg, #f0f5ff, #e6f0ff);
+      padding: 60px 40px;
+      border-radius: 20px;
+      margin: 40px 0;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .activity-title {
+      font-size: 1.6rem;
+      color: var(--navy-primary);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .activity-instructions {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .activity-case {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .case-title {
+      font-size: 1.4rem;
+      color: var(--navy-primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* === HEXADECIMAL VISUAL === */
+    .hex-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 30px 0;
+      gap: 15px;
+    }
+
+    .hex-digit {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.5rem;
+      font-weight: 700;
+      box-shadow: 0 5px 15px rgba(30, 58, 138, 0.2);
+    }
+
+    .hex-digit.small {
+      width: 45px;
+      height: 45px;
+      font-size: 1.2rem;
+    }
+
+    .hex-label {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--neutral-gray);
+      margin-top: 5px;
+    }
+
+    /* === MEMORY ADDRESS VISUAL === */
+    .memory-address-visual {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      padding: 30px;
+      border-radius: 20px;
+      margin: 30px 0;
+      border-left: 6px solid #f59e0b;
+    }
+
+    .address-example {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+      font-family: monospace;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .address-part {
+      background: var(--white);
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .address-separator {
+      color: var(--navy-primary);
+      font-size: 1.5rem;
+    }
+
+    .address-label {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--neutral-gray);
+      margin-top: 5px;
+    }
+
+    /* === INTERACTIVE GAME === */
+    .interactive-game {
+      background: linear-gradient(135deg, rgba(240, 245, 255, 0.9), rgba(219, 234, 254, 0.9));
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      border: 2px dashed rgba(30, 58, 138, 0.2);
+      margin: 10px 0;
+    }
+
+    .game-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      padding: 18px 35px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 20px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+    }
+
+    .game-link:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(30, 58, 138, 0.35);
+    }
+
+    /* === LIST STYLES === */
+    .content-list {
+      list-style: none;
+      margin: 25px 0;
+    }
+
+    .content-list li {
+      padding: 12px 0 12px 35px;
+      position: relative;
+      border-bottom: 1px solid rgba(30, 58, 138, 0.05);
+    }
+
+    .content-list li:last-child {
+      border-bottom: none;
+    }
+
+    .content-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 18px;
+      width: 8px;
+      height: 8px;
+      background: var(--navy-light);
+      border-radius: 50%;
+    }
+
+    .content-list strong {
+      color: var(--navy-primary);
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(219, 234, 254, 0.5), rgba(191, 219, 254, 0.3));
+      padding: 25px;
+      border-radius: 16px;
+      margin: 25px 0;
+      border-left: 5px solid var(--navy-light);
+    }
+
+    /* === NAVIGATION BUTTONS === */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 35px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow);
+    }
+
+    .nav-btn-prev {
+      background: var(--white);
+      color: var(--navy-primary);
+      border: 2px solid rgba(30, 58, 138, 0.2);
+    }
+
+    .nav-btn-next {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: var(--white);
+      padding: 60px 40px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.3rem;
+      transition: transform 0.5s ease;
+    }
+
+    .footer-logo:hover .footer-logo-icon {
+      transform: rotateY(180deg);
+    }
+
+    .footer-logo h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .footer-description {
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      transform-style: preserve-3d;
+    }
+
+    .social-link:hover {
+      background: rgba(59, 130, 246, 0.2);
+      color: var(--navy-light);
+      transform: translateY(-5px) translateZ(5px);
+    }
+
+    .footer-column h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: var(--white);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--navy-light);
+      border-radius: 2px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+      transform: translateX(5px);
+    }
+
+    .footer-links a i {
+      font-size: 0.8rem;
+      color: var(--navy-light);
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+      color: #94a3b8;
+    }
+
+    .footer-contact i {
+      color: var(--navy-light);
+      font-size: 1.2rem;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .footer-credit {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .footer-credit i {
+      color: #ef4444;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    .footer-credit strong {
+      color: var(--navy-light);
+      font-weight: 600;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1024px) {
+      .subbab-header-title {
+        font-size: 2.4rem;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+      }
+      
+      .logo {
+        flex: 1;
+      }
+      
+      .hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 30px 30px;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        overflow-y: auto;
+        gap: 5px;
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 5px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      
+      .logo-text {
+        font-size: 1.1rem;
+      }
+      
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      
+      .hero-sub {
+        padding: 120px 20px 30px;
+      }
+      
+      .section {
+        padding: 60px 20px;
+      }
+      
+      .content-body {
+        padding: 30px 20px;
+      }
+      
+      .nav-buttons {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .nav-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .memory-table {
+        font-size: 0.9rem;
+      }
+      
+      .memory-table th,
+      .memory-table td {
+        padding: 12px 8px;
+      }
+      
+      /* Overlay untuk menu mobile */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      /* Close button di dalam menu mobile */
+      .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--navy-primary);
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        z-index: 1001;
+      }
+      
+      .close-menu:hover {
+        background: rgba(30, 58, 138, 0.1);
+      }
+      
+      .subbab-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+      
+      .hex-visual {
+        flex-wrap: wrap;
+      }
+      
+      .address-example {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .subbab-header-title {
+        font-size: 1.8rem;
+      }
+      
+      .subbab-header-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+      }
+      
+      .content-header h3 {
+        font-size: 1.3rem;
+      }
+      
+      .activity-section {
+        padding: 40px 20px;
+      }
+      
+      .activity-instructions,
+      .activity-case {
+        padding: 20px;
+      }
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    .animate-fadeIn {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-laptop"></i>
+      </div>
+      <div class="logo-text">Bab 5 Pemanfaatan Perangkat Digital</div>
+    </div>
+    
+    <!-- Hamburger Button -->
+    <button class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <nav id="nav-menu">
+      <a href="index.html">Beranda</a>
+      <a href="bab4.html">Bab 4</a>
+      <a href="bab5.html" class="active">Bab 5</a>
+      <a href="ujikompetensi.html">Uji Kompetensi</a>
+      <a href="profilanggi.html">Profil Pengembang</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-sub">
+    <div class="hero-content-sub">
+      
+      <div class="subbab-header">
+        <div class="subbab-header-icon">
+          <i class="fas fa-memory"></i>
+        </div>
+        <h1 class="subbab-header-title">Sub Bab B: Pengalamatan Memori</h1>
+      </div>
+      
+      <p class="subbab-subtitle">
+        Memahami sistem bilangan heksadesimal dan mekanisme pengalamatan memori yang digunakan komputer untuk menyimpan dan mengakses data.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="content-container">
+      <!-- Pengantar: Pengalamatan Memori -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-info-circle"></i> Pengantar: Pengalamatan Memori</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Ketika kalian menggunakan komputer, ada kalanya kalian perlu menyimpan pekerjaan kalian agar bisa dibuka di waktu yang lain. Proses ini biasanya dilakukan pada perangkat penyimpanan, salah satunya <strong>hardisk</strong> atau <strong>SSD</strong> sebagai media penyimpanan data permanen dan memori sebagai media penyimpanan sementara. Nah, untuk melakukan penyimpanan data, perlu mekanisme yang disebut pengalamatan memori (<em>memory addressing</em>). Komputer sering menampilkan alamat memori dalam sistem bilangan heksadesimal.
+          </p>
+          
+          <div class="highlight-box">
+            <p class="content-text">
+              <strong>Fakta menarik:</strong> Sistem heksadesimal (basis 16) lebih mudah dipahami komputer daripada desimal (basis 10) karena hubungan langsungnya dengan sistem biner (basis 2). Setiap digit heksadesimal mewakili tepat 4 bit biner.
+            </p>
+          </div>
+        </div>
+      </div>
+
+   <!-- 1. Bilangan Heksadesimal -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-calculator"></i> 1. Bilangan Heksadesimal</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Sistem heksadesimal menggunakan 16 macam simbol, yaitu 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, dan F. Sistem ini disebut <strong>basis 16</strong>.
+          </p>
+          
+          <div class="image-container">
+            <img src="bil-heksadesimal.png" alt="Sistem Bilangan Heksadesimal" class="content-image">
+            <p class="image-caption">Gambar: Sistem bilangan heksadesimal dengan 16 digit (basis 16)</p>
+          </div>
+
+          <h4 style="font-size: 1.4rem; color: var(--navy-primary); margin-top: 40px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
+            <i class="fas fa-exchange-alt"></i> Konversi Bilangan Desimal ke Heksadesimal
+          </h4>
+          
+          <p class="content-text">
+            Konversi bilangan desimal ke heksadesimal dapat dilakukan dengan membagi bilangan desimal dengan 16, hingga tidak bisa dibagi lagi. Perhatikan contoh berikut: mengonversi nilai desimal 90 menjadi heksadesimal.
+          </p>
+          
+          <div class="conversion-example">
+            <h5><i class="fas fa-example"></i> Contoh: Mengonversi Desimal 90 ke Heksadesimal</h5>
+            
+            <table class="memory-table">
+              <thead>
+                <tr>
+                  <th>Desimal</th>
+                  <th>Pembagi</th>
+                  <th>Hasil Bagi</th>
+                  <th>Sisa</th>
+                  <th>Heksadesimal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>90</td>
+                  <td>16</td>
+                  <td>5</td>
+                  <td>10</td>
+                  <td>A</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>16</td>
+                  <td>0</td>
+                  <td>5</td>
+                  <td>5</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <p class="content-text" style="margin-top: 20px;">
+              <strong>Langkah-langkah:</strong>
+            </p>
+            <ol class="conversion-steps">
+              <li>Bagi 90 dengan 16 → hasil 5, sisa 10</li>
+              <li>Bagi 5 dengan 16 → hasil 0, sisa 5</li>
+              <li>Proses berhenti ketika hasil bagi adalah 0</li>
+              <li>Susun sisa dari bawah ke atas: 5 dan 10</li>
+              <li>Konversi sisa ke heksadesimal: 5 → 5, 10 → A</li>
+              <li>Hasil konversi: <strong>5A</strong></li>
+            </ol>
+          </div>
+          
+          <div class="highlight-box">
+            <p class="content-text">
+              <strong>Tips:</strong> Untuk mengingat konversi nilai 10-15 ke heksadesimal (A-F), gunakan mnemonik: <em>"All Boys Can Do Excellent Football"</em> (A=10, B=11, C=12, D=13, E=14, F=15).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Konversi Heksadesimal ke Desimal -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-exchange-alt"></i> Konversi Heksadesimal ke Desimal</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Konversi bilangan heksadesimal ke desimal menggunakan perkalian setiap bilangan dengan basis yang dipangkatkan sesuai urutannya, kemudian hasilnya dijumlahkan.
+          </p>
+          
+          <div class="conversion-example">
+            <h5><i class="fas fa-example"></i> Contoh 1: Mengonversi Heksadesimal 5A ke Desimal</h5>
+            
+            <table class="memory-table">
+              <thead>
+                <tr>
+                  <th>Heksadesimal</th>
+                  <th>Pangkat</th>
+                  <th>Hasil Pangkat (16<sup>n</sup>)</th>
+                  <th>Hasil Perkalian</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>5</td>
+                  <td>1</td>
+                  <td>16<sup>1</sup> = 16</td>
+                  <td>16 × 5 = 80</td>
+                </tr>
+                <tr>
+                  <td>A (10)</td>
+                  <td>0</td>
+                  <td>16<sup>0</sup> = 1</td>
+                  <td>1 × 10 = 10</td>
+                </tr>
+                <tr style="background-color: rgba(30, 58, 138, 0.1); font-weight: bold;">
+                  <td colspan="3">JUMLAH</td>
+                  <td>80 + 10 = 90</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <p class="content-text" style="margin-top: 20px; text-align: center;">
+              <strong>Hasil konversi: 5A<sub>16</sub> = 90<sub>10</sub></strong>
+            </p>
+          </div>
+          
+          <div class="conversion-example">
+            <h5><i class="fas fa-example"></i> Contoh 2: Mengonversi Heksadesimal 3A1 ke Desimal</h5>
+            
+            <table class="memory-table">
+              <thead>
+                <tr>
+                  <th>Heksadesimal</th>
+                  <th>Pangkat</th>
+                  <th>Hasil Pangkat (16<sup>n</sup>)</th>
+                  <th>Hasil Perkalian</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>3</td>
+                  <td>2</td>
+                  <td>16<sup>2</sup> = 256</td>
+                  <td>256 × 3 = 768</td>
+                </tr>
+                <tr>
+                  <td>A (10)</td>
+                  <td>1</td>
+                  <td>16<sup>1</sup> = 16</td>
+                  <td>16 × 10 = 160</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>16<sup>0</sup> = 1</td>
+                  <td>1 × 1 = 1</td>
+                </tr>
+                <tr style="background-color: rgba(30, 58, 138, 0.1); font-weight: bold;">
+                  <td colspan="3">JUMLAH</td>
+                  <td>768 + 160 + 1 = 929</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <p class="content-text" style="margin-top: 20px; text-align: center;">
+              <strong>Hasil konversi: 3A1<sub>16</sub> = 929<sub>10</sub></strong>
+            </p>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- 2. Pengalamatan Memori -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-map-marker-alt"></i> 2. Pengalamatan Memori</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Alamat memori komputer biasanya ditampilkan dalam bentuk heksadesimal yang digunakan komputer saat menyimpan data. Setiap kali sepotong informasi atau data disimpan, komputer harus menghitung dimana data akan disimpan dalam memori, berdasarkan segmen dan alamat dari <em>hard drive</em>. Alamat memori ditampilkan sebagai dua bilangan heksadesimal, sebagai contoh 0000:0008.
+          </p>
+          
+          <div class="memory-address-visual">
+            <div class="address-example">
+              <div>
+                <div class="address-part">0000</div>
+                <div class="address-label">Alamat Segmen</div>
+              </div>
+              <div class="address-separator">:</div>
+              <div>
+                <div class="address-part">0005</div>
+                <div class="address-label">Alamat Offset</div>
+              </div>
+              <div class="address-separator">=</div>
+              <div>
+                <div class="address-part">0005</div>
+                <div class="address-label">Alamat Fisik</div>
+              </div>
+            </div>
+            
+            <p class="content-text" style="text-align: center; margin-top: 20px;">
+              <strong>Alamat Fisik = Alamat Segmen + Alamat Offset</strong>
+            </p>
+          </div>
+          
+          <p class="content-text">
+            Sebenarnya, alamat fisik pada perangkat keras hanya terdiri atas satu bilangan heksadesimal. Namun, untuk memudahkan dalam proses pengaksesan data pada memori agar proses perhitungan menjadi lebih cepat, digunakan dua bilangan heksadesimal.
+          </p>
+          
+          <div class="highlight-box">
+            <p class="content-text">
+              <strong>Analoginya:</strong> Bayangkan sebuah apartemen besar. <strong>Alamat segmen</strong> adalah nomor lantai (misalnya Lantai 5), sedangkan <strong>alamat offset</strong> adalah nomor kamar di lantai tersebut (misalnya Kamar 12). <strong>Alamat fisik</strong> adalah kombinasi keduanya: Lantai 5, Kamar 12.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ilustrasi Penyimpanan Data -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-table"></i> Ilustrasi Penyimpanan Data Pada Alamat Memori</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Sebagai ilustrasi sederhana, misalnya kita mempunyai data dengan alamat memori seperti pada tabel berikut:
+          </p>
+          
+          <table class="memory-table">
+            <thead>
+              <tr>
+                <th>Alamat Memori</th>
+                <th>Data yang Tersimpan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0000:000A</td>
+                <td>7</td>
+              </tr>
+              <tr>
+                <td>0001:000B</td>
+                <td>17</td>
+              </tr>
+              <tr>
+                <td>0001:000F</td>
+                <td>34</td>
+              </tr>
+              <tr>
+                <td>0000:000D</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>0001:000E</td>
+                <td>39</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="table-caption">Tabel 5.3: Ilustrasi penyimpanan data pada alamat memori tertentu</p>
+          
+          <p class="content-text" style="margin-top: 30px;">
+            Jika dikaitkan dengan matriks, pengalamatan memori dianalogikan sebagai matriks dua dimensi dimana alamat segmen ialah barisnya, sedangkan alamat offset ialah kolomnya.
+          </p>
+          
+          <table class="memory-table">
+            <thead>
+              <tr>
+                <th>Segmen/Offset</th>
+                <th>000A</th>
+                <th>000B</th>
+                <th>000C</th>
+                <th>000D</th>
+                <th>000E</th>
+                <th>000F</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>0000</strong></td>
+                <td>7</td>
+                <td></td>
+                <td></td>
+                <td>20</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><strong>0001</strong></td>
+                <td></td>
+                <td>17</td>
+                <td></td>
+                <td></td>
+                <td>39</td>
+                <td>34</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="table-caption">Tabel 5.4: Ilustrasi penyimpanan data pada alamat memori sebagai matriks</p>
+        </div>
+      </div>
+
+      <!-- Alamat Fisik -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-hdd"></i> Menghitung Alamat Fisik</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Untuk mendapatkan alamat fisik pada data-data tersebut, kalian hanya perlu menambahkan nilai bilangan pada alamat segmen dan alamat offset dalam format heksadesimal.
+          </p>
+          
+          <table class="memory-table">
+            <thead>
+              <tr>
+                <th>Alamat Memori</th>
+                <th>Alamat Fisik</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0000:000A</td>
+                <td>0000 + 000A = 000A</td>
+              </tr>
+              <tr>
+                <td>0001:000B</td>
+                <td>0001 + 000B = 000C</td>
+              </tr>
+              <tr>
+                <td>0001:000F</td>
+                <td>0001 + 000F = 0010</td>
+              </tr>
+              <tr>
+                <td>0000:000D</td>
+                <td>0000 + 000D = 000D</td>
+              </tr>
+              <tr>
+                <td>0001:000E</td>
+                <td>0001 + 000E = 000F</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="table-caption">Tabel 5.5: Ilustrasi penyimpanan data pada alamat memori dan alamat fisik</p>
+          
+          <p class="content-text" style="margin-top: 30px;">
+            Jadi data-data tersebut akan tersimpan pada alamat fisik perangkat keras penyimpanan sebagai berikut:
+          </p>
+          
+          <table class="memory-table">
+            <thead>
+              <tr>
+                <th>Alamat Fisik</th>
+                <th>Data yang Tersimpan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0009</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>000A</td>
+                <td>7</td>
+              </tr>
+              <tr>
+                <td>000B</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>000C</td>
+                <td>17</td>
+              </tr>
+              <tr>
+                <td>000D</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>000E</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>000F</td>
+                <td>39</td>
+              </tr>
+              <tr>
+                <td>0010</td>
+                <td>34</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="table-caption">Tabel 5.6: Ilustrasi penyimpanan data pada alamat fisik</p>
+          
+          <div class="highlight-box">
+            <p class="content-text">
+              <strong>Catatan Penting:</strong> Penjumlahan heksadesimal mengikuti aturan khusus. Contoh: 0001 + 000F = 0010 karena F (15) + 1 = 16, yang dalam heksadesimal adalah 10 (1 pada posisi 16<sup>1</sup> dan 0 pada posisi 16<sup>0</sup>).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aktivitas Individu: Sandi Heksadesimal -->
+      <div class="activity-section animate-fadeIn">
+        <h3 class="activity-title">
+          <i class="fas fa-user-check"></i> Aktivitas Individu: Sandi Heksadesimal
+        </h3>
+        
+        <div class="activity-instructions">
+          <p class="content-text">
+            <strong>Aktivitas PPD-K8-02</strong><br>
+            Lengkapi tabel berikut untuk mencari nilai heksadesimal, dan nilai desimalnya.
+          </p>
+        </div>
+        
+        <div class="activity-case">
+          <h4 class="case-title">
+            <i class="fas fa-table"></i> Tabel Konversi Heksadesimal-Desimal
+          </h4>
+          
+          <table class="memory-table">
+            <thead>
+              <tr>
+                <th>Nilai Desimal</th>
+                <th>Nilai Heksadesimal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td>3B</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>2A1</td>
+              </tr>
+              <tr>
+                <td>217</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>239</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>80</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>3F</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="interactive-game" style="margin-top: 30px;">
+            <p class="content-text">
+              Gunakan kalkulator heksadesimal online atau buat tabel konversi untuk membantu menyelesaikan aktivitas ini!
+            </p>
+            <a href="https://www.rapidtables.com/convert/number/decimal-to-hex.html" target="_blank" class="game-link">
+              <i class="fas fa-calculator"></i> Buka Kalkulator Heksadesimal
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aktivitas Individu: Alamat Memori -->
+      <div class="activity-section animate-fadeIn">
+        <h3 class="activity-title">
+          <i class="fas fa-user-check"></i> Aktivitas Individu: Alamat Memori
+        </h3>
+        
+        <div class="activity-instructions">
+          <p class="content-text">
+            <strong>Aktivitas PPD-K8-03</strong><br>
+            Lengkapi alamat fisik dari tabel berikut ini:
+          </p>
+        </div>
+        
+        <div class="activity-case">
+          <h4 class="case-title">
+            <i class="fas fa-table"></i> Tabel Alamat Memori dan Alamat Fisik
+          </h4>
+          
+          <table class="memory-table">
+            <thead>
+              <tr>
+                <th>Alamat Memori</th>
+                <th>Data yang Tersimpan</th>
+                <th>Alamat Fisik</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0001:000A</td>
+                <td>100</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>0002:000B</td>
+                <td>120</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>0000:000F</td>
+                <td>45</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>0001:000D</td>
+                <td>37</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>0001:0001</td>
+                <td>187</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>0001:0003</td>
+                <td>287</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>0002:000F</td>
+                <td>367</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>0000:0007</td>
+                <td>109</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>0002:0008</td>
+                <td>198</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>0000:0000</td>
+                <td>762</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="interactive-game" style="margin-top: 30px;">
+            <p class="content-text">
+              Ingat rumus: <strong>Alamat Fisik = Alamat Segmen + Alamat Offset</strong>. Gunakan penjumlahan heksadesimal!
+            </p>
+            <a href="hex-calculator.html" target="_blank" class="game-link">
+              <i class="fas fa-plus-circle"></i> Buka Kalkulator Penjumlahan Heksadesimal
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Game -->
+      <div class="interactive-game animate-fadeIn">
+        <h4 class="case-title" style="text-align: center; margin-bottom: 20px;">
+          <i class="fas fa-gamepad"></i> Game Interaktif: Tebak Alamat Memori
+        </h4>
+        <p class="content-text">
+          Mainkan game interaktif untuk melatih pemahaman tentang konversi heksadesimal dan pengalamatan memori!
+        </p>
+        <a href="memory-addressing-game.html" target="_blank" class="game-link">
+          <i class="fas fa-play-circle"></i> Mainkan Game Interaktif
+        </a>
+        <p class="image-caption" style="margin-top: 20px;">Klik link di atas untuk memainkan game interaktif</p>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="nav-buttons">
+        <a href="bab5-A.html" class="nav-btn nav-btn-prev">
+          <i class="fas fa-arrow-left"></i> Kembali ke Sub Bab A
+        </a>
+        <a href="bab5-C.html" class="nav-btn nav-btn-next">
+          Lanjut ke Sub Bab C <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h3>Bahan Ajar Informatika</h3>
+          </div>
+          <p class="footer-description">
+            Platform pembelajaran digital berbasis Kurikulum Merdeka untuk mata pelajaran Informatika SMP Kelas 8 dengan fokus pada nilai-nilai budaya Nusa Tenggara Timur.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Menu Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+            <li><a href="bab4.html"><i class="fas fa-chevron-right"></i> Bab 4</a></li>
+            <li><a href="bab5.html"><i class="fas fa-chevron-right"></i> Bab 5</a></li>
+            <li><a href="ujikompetensi.html"><i class="fas fa-chevron-right"></i> Uji Kompetensi</a></li>
+            <li><a href="profilanggi.html"><i class="fas fa-chevron-right"></i> Profil Pengembang</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Kontak Pengembang</h4>
+          <ul class="footer-contact">
+            <li>
+              <i class="fas fa-envelope"></i>
+              <div>anggiclementine02@gmail.com</div>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <div>085804629875</div>
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <div>Kupang, Nusa Tenggara Timur</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Bahan Ajar Digital Informatika by Anggi Clementine. All Rights Reserved.</p>
+        <p class="footer-credit">
+          <i class="fas fa-heart"></i> Dikembangkan untuk <strong>Generasi Digital NTT yang Berbudaya</strong>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Hamburger menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('nav-menu');
+      const body = document.body;
+      
+      // Buat overlay element
+      const overlay = document.createElement('div');
+      overlay.className = 'nav-overlay';
+      body.appendChild(overlay);
+      
+      // Buat close button untuk mobile
+      const closeButton = document.createElement('button');
+      closeButton.className = 'close-menu';
+      closeButton.innerHTML = '<i class="fas fa-times"></i>';
+      closeButton.setAttribute('aria-label', 'Tutup menu');
+      navMenu.appendChild(closeButton);
+      
+      // Toggle menu saat hamburger diklik
+      hamburger.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        body.style.overflow = 'hidden';
+      });
+      
+      // Tutup menu saat overlay diklik
+      overlay.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+      });
+      
+      // Tutup menu saat close button diklik
+      closeButton.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+      });
+      
+      // Tutup menu saat link di dalam menu diklik
+      const navLinks = navMenu.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.style.overflow = '';
+        });
+      });
+      
+      // Tutup menu saat window di-resize ke ukuran besar
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.style.overflow = '';
+        }
+      });
+    });
+
+    // Animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeIn');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const animatedElements = document.querySelectorAll('.content-block, .activity-section, .interactive-game');
+      animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+      });
+    });
+
+    // Hex digit hover effect
+    document.querySelectorAll('.hex-digit').forEach(digit => {
+      digit.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1) rotate(5deg)';
+      });
+      
+      digit.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1) rotate(0deg)';
+      });
+    });
+  </script>
+</body>
+</html>

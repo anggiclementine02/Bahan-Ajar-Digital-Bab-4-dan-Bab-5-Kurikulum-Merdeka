@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sub Bab E: Komunikasi Data pada Ponsel - Bab 5: Pemanfaatan Perangkat Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --navy-primary: #1e3a8a;
+      --navy-secondary: #1e40af;
+      --navy-light: #3b82f6;
+      --navy-accent: #60a5fa;
+      --neutral-dark: #1f2937;
+      --neutral-light: #f8fafc;
+      --neutral-gray: #6b7280;
+      --white: #ffffff;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+      --shadow-3d: 0 25px 50px rgba(30, 58, 138, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--neutral-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* === HEADER === */
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px) saturate(180%);
+      -webkit-backdrop-filter: blur(15px) saturate(180%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    header.scrolled {
+      padding: 12px 40px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: translateY(-2px);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--neutral-gray);
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 10px 18px;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.08), transparent);
+      transition: left 0.6s ease;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      color: var(--navy-primary);
+      background: rgba(30, 58, 138, 0.04);
+    }
+
+    nav a.active {
+      color: var(--white);
+      background: var(--navy-primary);
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    /* === HAMBURGER MENU === */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--navy-primary);
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    .hamburger:hover {
+      background: rgba(30, 58, 138, 0.1);
+    }
+
+    /* Overlay dan close button default hidden */
+    .nav-overlay,
+    .close-menu {
+      display: none;
+    }
+
+    /* === HERO SECTION === */
+    .hero-sub {
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 40px 40px;
+      background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 50%, #dbeafe 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-sub::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.05) 0%, transparent 70%);
+      top: -150px;
+      right: -100px;
+    }
+
+    .hero-sub::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .hero-content-sub {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy-primary);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: rgba(30, 58, 138, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(30, 58, 138, 0.12);
+      transform: translateX(-5px);
+    }
+
+    .subbab-header {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .subbab-header-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 2.2rem;
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+    }
+
+    .subbab-header-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      line-height: 1.1;
+    }
+
+    .subbab-subtitle {
+      font-size: 1.3rem;
+      color: var(--neutral-gray);
+      max-width: 800px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    /* === CONTENT SECTIONS === */
+    .section {
+      padding: 80px 40px;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+      border-radius: 2px;
+    }
+
+    .section-title p {
+      font-size: 1.15rem;
+      color: var(--neutral-gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* === CONTENT CONTAINER === */
+    .content-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* === CONTENT BLOCK === */
+    .content-block {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .content-block:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .content-header {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      padding: 25px 40px;
+      position: relative;
+    }
+
+    .content-header h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .content-body {
+      padding: 40px;
+    }
+
+    .content-text {
+      font-size: 1.1rem;
+      color: var(--neutral-dark);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .content-text:last-child {
+      margin-bottom: 0;
+    }
+
+    /* === IMAGE CONTAINER === */
+    .image-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .content-image {
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-bottom: 15px;
+    }
+
+    .content-image:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-3d);
+    }
+
+    .image-caption {
+      font-style: italic;
+      color: var(--neutral-gray);
+      margin-top: 0px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .text-image-row {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      margin: 30px 0;
+    }
+
+    .text-side {
+      flex: 1;
+    }
+
+    .image-side {
+      flex: 0 0 350px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .text-image-row {
+        flex-direction: column;
+      }
+
+      .image-side {
+        flex: none;
+        width: 100%;
+      }
+    }
+
+    /* === HARDWARE GRID === */
+    .hardware-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    .grid-custom {
+      display: grid;
+      gap: 25px;
+      margin: 30px 0;
+    }
+
+    .hardware-category {
+      margin-bottom: 50px;
+    }
+
+    .hardware-category h4 {
+      font-size: 1.5rem;
+      color: var(--navy-primary);
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--navy-accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .device-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .device-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .device-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .device-card h5 {
+      font-size: 1.3rem;
+      color: var(--neutral-dark);
+      margin-bottom: 15px;
+    }
+
+    .device-image-container {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .device-image {
+      max-width: 100%;
+      max-height: 180px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .device-card:hover .device-image {
+      transform: scale(1.05);
+    }
+
+    /* === SOFTWARE SECTIONS === */
+    .software-section {
+      margin-bottom: 50px;
+    }
+
+    .software-section h4 {
+      font-size: 1.5rem;
+      color: var(--navy-primary);
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--navy-accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .software-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .software-card {
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .software-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      background: linear-gradient(135deg, #f0f5ff, #e6f0ff);
+    }
+
+    .software-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(30, 58, 138, 0.2);
+    }
+
+    .software-card h5 {
+      font-size: 1.2rem;
+      color: var(--neutral-dark);
+      margin-bottom: 10px;
+    }
+
+    .software-image-container {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .software-image {
+      max-width: 100%;
+      max-height: 120px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .software-card:hover .software-image {
+      transform: scale(1.05);
+    }
+
+    /* === SYSTEM ANALOGY === */
+    .analogy-box {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      padding: 30px;
+      border-radius: 20px;
+      border-left: 6px solid #f59e0b;
+      margin: 40px 0;
+    }
+
+    .analogy-box h4 {
+      color: #92400e;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.4rem;
+    }
+
+    /* === ACTIVITY SECTION === */
+    .activity-section {
+      background: linear-gradient(135deg, #f0f5ff, #e6f0ff);
+      padding: 60px 40px;
+      border-radius: 20px;
+      margin: 40px 0;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .activity-title {
+      font-size: 1.6rem;
+      color: var(--navy-primary);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .activity-instructions {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .activity-case {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .case-title {
+      font-size: 1.4rem;
+      color: var(--navy-primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* === TABLE STYLES === */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .data-table th {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      padding: 18px 15px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .data-table td {
+      padding: 16px 15px;
+      border-bottom: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .data-table tr:nth-child(even) {
+      background: rgba(30, 58, 138, 0.02);
+    }
+
+    .data-table tr:hover {
+      background: rgba(30, 58, 138, 0.05);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* === LIST STYLES === */
+    .content-list {
+      list-style: none;
+      margin: 25px 0;
+    }
+
+    .content-list li {
+      padding: 12px 0 12px 35px;
+      position: relative;
+      border-bottom: 1px solid rgba(30, 58, 138, 0.05);
+    }
+
+    .content-list li:last-child {
+      border-bottom: none;
+    }
+
+    .content-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 18px;
+      width: 8px;
+      height: 8px;
+      background: var(--navy-light);
+      border-radius: 50%;
+    }
+
+    .content-list strong {
+      color: var(--navy-primary);
+    }
+
+    .highlight-box {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .highlight-box .content-list {
+      list-style: none;
+    }
+
+    .highlight-box .content-list li::before {
+      display: none;
+    }
+
+    /* === NAVIGATION BUTTONS === */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 35px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow);
+    }
+
+    .nav-btn-prev {
+      background: var(--white);
+      color: var(--navy-primary);
+      border: 2px solid rgba(30, 58, 138, 0.2);
+    }
+
+    .nav-btn-next {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: var(--white);
+      padding: 60px 40px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.3rem;
+      transition: transform 0.5s ease;
+    }
+
+    .footer-logo:hover .footer-logo-icon {
+      transform: rotateY(180deg);
+    }
+
+    .footer-logo h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .footer-description {
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      transform-style: preserve-3d;
+    }
+
+    .social-link:hover {
+      background: rgba(59, 130, 246, 0.2);
+      color: var(--navy-light);
+      transform: translateY(-5px) translateZ(5px);
+    }
+
+    .footer-column h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: var(--white);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--navy-light);
+      border-radius: 2px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+      transform: translateX(5px);
+    }
+
+    .footer-links a i {
+      font-size: 0.8rem;
+      color: var(--navy-light);
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+      color: #94a3b8;
+    }
+
+    .footer-contact i {
+      color: var(--navy-light);
+      font-size: 1.2rem;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .footer-credit {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .footer-credit i {
+      color: #ef4444;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    .footer-credit strong {
+      color: var(--navy-light);
+      font-weight: 600;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1024px) {
+      .subbab-header-title {
+        font-size: 2.4rem;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .hardware-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+      }
+      
+      .logo {
+        flex: 1;
+      }
+      
+      .hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 30px 30px;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        overflow-y: auto;
+        gap: 5px;
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 5px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      
+      .logo-text {
+        font-size: 1.1rem;
+      }
+      
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      
+      .hero-sub {
+        padding: 120px 20px 30px;
+      }
+      
+      .section {
+        padding: 60px 20px;
+      }
+      
+      .content-body {
+        padding: 30px 20px;
+      }
+      
+      .nav-buttons {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .nav-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      /* Overlay untuk menu mobile */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      /* Close button di dalam menu mobile */
+      .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--navy-primary);
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        z-index: 1001;
+      }
+      
+      .close-menu:hover {
+        background: rgba(30, 58, 138, 0.1);
+      }
+      
+      .subbab-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+      
+      .hardware-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .software-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .subbab-header-title {
+        font-size: 1.8rem;
+      }
+      
+      .subbab-header-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+      }
+      
+      .content-header h3 {
+        font-size: 1.3rem;
+      }
+      
+      .device-card {
+        padding: 20px;
+      }
+      
+      .software-card {
+        padding: 20px;
+      }
+      
+      .software-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    .animate-fadeIn {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-mobile-alt"></i>
+      </div>
+      <div class="logo-text">Bab 5 Pemanfaatan Perangkat Digital</div>
+    </div>
+    
+    <!-- Hamburger Button -->
+    <button class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <nav id="nav-menu">
+      <a href="index.html">Beranda</a>
+      <a href="bab4.html">Bab 4</a>
+      <a href="bab5.html" class="active">Bab 5</a>
+      <a href="ujikompetensi.html">Uji Kompetensi</a>
+      <a href="profilanggi.html">Profil Pengembang</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-sub">
+    <div class="hero-content-sub">
+      
+      <div class="subbab-header">
+        <div class="subbab-header-icon">
+          <i class="fas fa-signal"></i>
+        </div>
+        <h1 class="subbab-header-title">Sub Bab E: Komunikasi Data pada Ponsel</h1>
+      </div>
+      
+      <p class="subbab-subtitle">
+        Memahami mekanisme pengiriman dan penerimaan data pada ponsel, peran BTS, dan faktor-faktor yang mempengaruhi kekuatan sinyal.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="content-container">
+      <!-- Pengantar Komunikasi Data -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-info-circle"></i> Pengantar: Komunikasi Data pada Ponsel</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Komunikasi data merupakan sebuah mekanisme pengiriman dan penerimaan data dari satu perangkat ke perangkat lain. Ketika kita menggunakan ponsel, baik untuk keperluan mengirim pesan atau SMS (Short Message System), panggilan suara, koneksi internet, maupun mentransfer dokumen, ada mekanisme komunikasi data yang terjadi antara ponsel pengirim dan ponsel penerima.
+          </p>
+          
+          <div class="image-container">
+            <img src="media/image1.jpeg" 
+                 alt="Ilustrasi Komunikasi Data Ponsel" class="content-image">
+            <p class="image-caption">Ilustrasi komunikasi data pada ponsel</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Peran BTS -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-broadcast-tower"></i> Peran BTS (Base Transceiver Station)</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Untuk dapat digunakan sebagai alat komunikasi, ponsel memerlukan suatu elemen jaringan seluler yang berperan penting sebagai pemancar dan penerima sinyal dari ponsel, yaitu BTS (Base Transceiver Station). BTS adalah suatu infrastruktur telekomunikasi yang memfasilitasi komunikasi nirkabel antara perangkat komunikasi dan jaringan komputer.
+          </p>
+          
+          <p class="content-text">
+            Dalam satu kota atau wilayah, terdapat banyak BTS. Ponsel akan dilayani oleh BTS yang ada di sekitarnya, terutama yang paling dekat jaraknya. Pelayanan ini akan berpindah secara otomatis, ketika ponsel sedang bergerak dari wilayah layanan BTS yang satu ke wilayah layanan BTS yang lain. Itu sebabnya dalam bahasa Inggris, ponsel disebut <em>"mobile phone"</em>.
+          </p>
+          
+          <div class="image-container">
+            <img src="GAMBAR_BTS_PONSEL.jpg" 
+                 alt="Ponsel Selalu Menerima Sinyal dari BTS Terdekat" class="content-image">
+            <p class="image-caption">Gambar 5.13 Ponsel Selalu Menerima Sinyal dari BTS Terdekat</p>
+            <p class="image-caption"><em>Sumber: Buku Siswa Informatika Kelas VIII (2021)</em></p>
+          </div>
+          
+          <p class="content-text">
+            Sebagai contoh, seperti ditunjukkan pada Gambar 5.13, meskipun ada tiga BTS yang mengelilingi, tetapi ponsel mendapatkan sinyal dari BTS terdekat, yaitu BTS A, karena memiliki jarak yang paling dekat dengan ponsel.
+          </p>
+        </div>
+      </div>
+
+      <!-- Faktor Kekuatan Sinyal -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-wifi"></i> Faktor-Faktor yang Mempengaruhi Kekuatan Sinyal</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Kekuatan sinyal dari ponsel bergantung pada berbagai hal. Secara sederhana, kekuatan sinyal dari ponsel biasanya tergantung pada jarak ponsel dan BTS terdekat. Makin jauh jaraknya, sinyal akan makin melemah.
+          </p>
+          
+          <ol class="content-list">
+            <li>
+              <strong>Jarak dari BTS</strong><br>
+              Jarak antara pemancar sinyal BTS dan penerima ponsel sangat menentukan kualitasnya. Semakin dekat BTS, maka sinyalnya akan semakin kuat. Sebaliknya, jika ponsel dan BTS berada pada jarak yang berjauhan, sinyal akan semakin lemah.
+            </li>
+            <li>
+              <strong>Material Bangunan</strong><br>
+              Material beton, baja, dan sebagian besar bahan bangunan lainnya, sangat dapat menghalangi sinyal seluler. Itulah mengapa saat kalian berada di ruang bawah tanah/basement, ponsel tidak memiliki jalan untuk mencapai menara karena terhalang dinding beton/baja sehingga kekuatan sinyalnya lemah.
+            </li>
+            <li>
+              <strong>Halangan</strong><br>
+              Meskipun ponsel kalian berada sangat dekat dengan BTS, biasanya, halangan yang berada antara ponsel dan BTS juga akan mempengaruhi sinyal pada ponsel. Jika kalian berada pada ruang terbuka tanpa halangan apapun, sinyal ponsel akan kuat. Namun, jika kalian berada di sebuah ruangan yang di dalamnya ada penghalang berupa tembok, besi, bangunan, maka sinyalnya akan semakin lemah. Coba kalian bandingkan sinyal ponsel ketika kalian berada di dalam ruangan dan di luar ruangan, meski berada pada jarak yang sama, kekuatan sinyal akan terasa berbeda.
+            </li>
+            <li>
+              <strong>Cuaca</strong><br>
+              Gelombang radio berjalan melalui atmosfer. Jadi, saat cuaca sedang buruk, akan dapat menghalangi sinyal. Biasanya, ponsel kalian akan memiliki sinyal yang lebih baik pada hari yang cerah daripada saat hujan atau berkabut.
+            </li>
+            <li>
+              <strong>Pengguna Lain dalam Jaringan yang Sama</strong><br>
+              Menara seluler hanya dirancang untuk menangani sejumlah koneksi tertentu pada saat bersamaan. Oleh sebab itu, jika dalam sebuah area BTS, ada banyak ponsel yang terhubung dengan BTS tersebut, kekuatan sinyal akan melemah.
+            </li>
+          </ol>
+          
+          <div class="image-container">
+            <img src="media/image3.png" 
+                 alt="Indikator Kekuatan Sinyal HP" class="content-image">
+            <p class="image-caption">Gambar 5.14 Indikator Kekuatan Sinyal HP yang Dipengaruhi BTS</p>
+            <p class="image-caption"><em>Sumber: Buku Siswa Informatika Kelas VIII (2021)</em></p>
+          </div>
+          
+          <p class="content-text">
+            Kuat atau lemahnya sinyal ditunjukkan oleh indikator sinyal pada ponsel, seperti pada Gambar 5.14. Amati sebuah ponsel. Lihatlah ada berapa bar sinyal yang muncul di ruang terbuka. Kalau hanya satu, berarti BTS terdekat yang terhubung dengan ponsel memiliki jarak yang jauh. Sebaliknya, jika ada empat bar, jarak BTS-nya sangat dekat.
+          </p>
+        </div>
+      </div>
+
+      <!-- Aktivitas Individu -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-user-check"></i> Aktivitas Individu: Kekuatan Sinyal Ponsel</h3>
+        </div>
+        <div class="content-body">
+          <div class="activity-instructions">
+            <h4 class="activity-title">
+              <i class="fas fa-tasks"></i> Instruksi Aktivitas
+            </h4>
+            <p class="content-text">
+              Adakah BTS di sekitar lingkungan kalian? Jika ada, coba kalian dekati BTS tersebut dan kemudian bandingkan indikator kekuatan sinyal di ponsel, apakah berubah? Jika tidak melihat BTS, cobalah berpindah-pindah lokasi dan amati sinyal ponsel. Apakah berubah-ubah saat kalian berpindah tempat? Tentukan lokasi mana yang sinyalnya paling kuat dan juga paling lemah. Mengapa hal tersebut dapat terjadi?
+            </p>
+          </div>
+          
+          <div class="activity-case">
+            <h4 class="case-title">
+              <i class="fas fa-map-marked-alt"></i> Studi Kasus: Konfigurasi Lokasi Ponsel dan BTS
+            </h4>
+            
+            <div class="image-container">
+              <img src="media/image4.png" 
+                   alt="Contoh Konfigurasi Lokasi Ponsel dan BTS" class="content-image">
+              <p class="image-caption">Gambar 5.15 Contoh Konfigurasi Lokasi Ponsel dan BTS</p>
+              <p class="image-caption"><em>Sumber: Iman Budiman/Kemendikbudristek (2024)</em></p>
+            </div>
+            
+            <p class="content-text">
+              Jawablah pertanyaan berikut berdasarkan Gambar 5.15, dengan asumsi ponsel berada di ruang terbuka tanpa halangan.
+            </p>
+            
+            <div class="content-text">
+              <strong>1. Identifikasi kira-kira pada BTS mana, HP akan mendapatkan sinyal?</strong><br>
+              <p>Berdasarkan Gambar 5.15, setiap ponsel akan terhubung dengan BTS terdekatnya.</p>
+            </div>
+            
+            <div class="content-text">
+              <strong>2. Diasumsikan jika jarak HP dan BTS terdekat lebih kecil dari 3 meter, maka HP akan mendapatkan sinyal yang kuat. Jika sebaliknya, sinyalnya akan lemah. Lakukan identifikasi kekuatan sinyal dari setiap HP tersebut pada tabel berikut:</strong>
+            </div>
+            
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>HP</th>
+                  <th>Nomor BTS</th>
+                  <th>Kekuatan Sinyal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>HP 1</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>HP 2</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>HP 3</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>HP 4</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>HP 5</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>HP 6</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <p class="content-text">
+              <strong>Petunjuk:</strong> Perhatikan jarak antara setiap ponsel dengan BTS terdekatnya. Gunakan skala pada gambar untuk menentukan apakah jaraknya kurang dari 3 meter atau lebih.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="nav-buttons">
+        <a href="bab5-D.html" class="nav-btn nav-btn-prev">
+          <i class="fas fa-arrow-left"></i> Kembali ke Sub Bab D
+        </a>
+        <a href="bab5-F.html" class="nav-btn nav-btn-next">
+          Lanjut ke Sub Bab F <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h3>Bahan Ajar Informatika</h3>
+          </div>
+          <p class="footer-description">
+            Platform pembelajaran digital berbasis Kurikulum Merdeka untuk mata pelajaran Informatika SMP Kelas 8 dengan fokus pada nilai-nilai budaya Nusa Tenggara Timur.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Menu Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+            <li><a href="bab4.html"><i class="fas fa-chevron-right"></i> Bab 4</a></li>
+            <li><a href="bab5.html"><i class="fas fa-chevron-right"></i> Bab 5</a></li>
+            <li><a href="ujikompetensi.html"><i class="fas fa-chevron-right"></i> Uji Kompetensi</a></li>
+            <li><a href="profilanggi.html"><i class="fas fa-chevron-right"></i> Profil Pengembang</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Kontak Pengembang</h4>
+          <ul class="footer-contact">
+            <li>
+              <i class="fas fa-envelope"></i>
+              <div>anggiclementine02@gmail.com</div>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <div>085804629875</div>
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <div>Kupang, Nusa Tenggara Timur</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Bahan Ajar Digital Informatika by Anggi Clementine. All Rights Reserved.</p>
+        <p class="footer-credit">
+          <i class="fas fa-heart"></i> Dikembangkan untuk <strong>Generasi Digital NTT yang Berbudaya</strong>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Hamburger menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('nav-menu');
+      const body = document.body;
+      
+      // Buat overlay element
+      const overlay = document.createElement('div');
+      overlay.className = 'nav-overlay';
+      body.appendChild(overlay);
+      
+      // Buat close button untuk mobile
+      const closeButton = document.createElement('button');
+      closeButton.className = 'close-menu';
+      closeButton.innerHTML = '<i class="fas fa-times"></i>';
+      closeButton.setAttribute('aria-label', 'Tutup menu');
+      navMenu.appendChild(closeButton);
+      
+      // Toggle menu saat hamburger diklik
+      hamburger.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        body.style.overflow = 'hidden';
+      });
+      
+      // Tutup menu saat overlay diklik
+      overlay.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+      });
+      
+      // Tutup menu saat close button diklik
+      closeButton.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+      });
+      
+      // Tutup menu saat link di dalam menu diklik
+      const navLinks = navMenu.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.style.overflow = '';
+        });
+      });
+      
+      // Tutup menu saat window di-resize ke ukuran besar
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.style.overflow = '';
+        }
+      });
+    });
+
+    // Animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeIn');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const animatedElements = document.querySelectorAll('.content-block');
+      animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

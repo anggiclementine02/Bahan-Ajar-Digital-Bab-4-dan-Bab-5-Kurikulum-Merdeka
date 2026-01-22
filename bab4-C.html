@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sub Bab C: Etika Bermedia Digital - Bab 4: Jejak Bermedia Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --navy-primary: #1e3a8a;
+      --navy-secondary: #1e40af;
+      --navy-light: #3b82f6;
+      --navy-accent: #60a5fa;
+      --neutral-dark: #1f2937;
+      --neutral-light: #f8fafc;
+      --neutral-gray: #6b7280;
+      --white: #ffffff;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+      --shadow-3d: 0 25px 50px rgba(30, 58, 138, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--neutral-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* === HEADER === */
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px) saturate(180%);
+      -webkit-backdrop-filter: blur(15px) saturate(180%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    header.scrolled {
+      padding: 12px 40px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: translateY(-2px);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--neutral-gray);
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 10px 18px;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.08), transparent);
+      transition: left 0.6s ease;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      color: var(--navy-primary);
+      background: rgba(30, 58, 138, 0.04);
+    }
+
+    nav a.active {
+      color: var(--white);
+      background: var(--navy-primary);
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    /* === HAMBURGER MENU === */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--navy-primary);
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    .hamburger:hover {
+      background: rgba(30, 58, 138, 0.1);
+    }
+
+    /* Overlay dan close button default hidden */
+    .nav-overlay,
+    .close-menu {
+      display: none;
+    }
+
+    /* === HERO SECTION === */
+    .hero-sub {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 40px 40px;
+      background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 50%, #dbeafe 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-sub::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.05) 0%, transparent 70%);
+      top: -150px;
+      right: -100px;
+    }
+
+    .hero-sub::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .hero-content-sub {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy-primary);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: rgba(30, 58, 138, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(30, 58, 138, 0.12);
+      transform: translateX(-5px);
+    }
+
+    .subbab-header {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .subbab-header-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 2.2rem;
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+    }
+
+    .subbab-header-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      line-height: 1.1;
+    }
+
+    .subbab-subtitle {
+      font-size: 1.3rem;
+      color: var(--neutral-gray);
+      max-width: 800px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    /* === CONTENT SECTIONS === */
+    .section {
+      padding: 80px 40px;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+      border-radius: 2px;
+    }
+
+    .section-title p {
+      font-size: 1.15rem;
+      color: var(--neutral-gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* === CONTENT CONTAINER === */
+    .content-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    /* === CONTENT BLOCK === */
+    .content-block {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .content-block:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .content-header {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      padding: 25px 40px;
+      position: relative;
+    }
+
+    .content-header h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .content-body {
+      padding: 40px;
+    }
+
+    .content-text {
+      font-size: 1.1rem;
+      color: var(--neutral-dark);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .content-text:last-child {
+      margin-bottom: 0;
+    }
+
+    /* === IMAGE CONTAINER === */
+    .image-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .content-image {
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-bottom: 15px;
+    }
+
+    .content-image:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-3d);
+    }
+
+    .image-caption {
+      font-style: italic;
+      color: var(--neutral-gray);
+      margin-top: 0px;
+      font-size: 0.7rem;
+      line-height: 1.5;
+    }
+
+    .text-image-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .text-side {
+      flex: 1;
+    }
+
+    .image-side {
+      flex: 0 0 400px;
+      text-align: center;
+    }
+
+    /* Responsif: HP otomatis turun ke bawah */
+    @media (max-width: 768px) {
+      .text-image-row {
+        flex-direction: column;
+      }
+
+      .image-side {
+        flex: none;
+        width: 100%;
+      }
+    }
+
+    /* === ETHICS CATEGORIES === */
+    .ethics-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+
+    .ethics-card {
+      background: linear-gradient(135deg, rgba(240, 245, 255, 0.8), rgba(219, 234, 254, 0.8));
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      transition: all 0.4s ease;
+    }
+
+    .ethics-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .ethics-card h4 {
+      color: var(--navy-primary);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+    }
+
+    /* === ETHICS SCOPE DIAGRAM === */
+    .ethics-scope {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
+
+    .scope-diagram {
+      position: relative;
+      width: 400px;
+      height: 400px;
+    }
+
+    .scope-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 170px;
+      height: 170px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.7rem;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .scope-item {
+      position: absolute;
+      width: 140px;
+      text-align: center;
+    }
+
+    .scope-item.top {
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .scope-item.right {
+      top: 50%;
+      right: -40px;
+      transform: translateY(-50%);
+    }
+
+    .scope-item.bottom {
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .scope-item.left {
+      top: 50%;
+      left: -30px;
+      transform: translateY(-50%);
+    }
+
+    .scope-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(59, 130, 246, 0.1));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      color: var(--navy-primary);
+      font-size: 1.5rem;
+    }
+
+    .scope-item h5 {
+      font-size: 0.9rem;
+      color: var(--navy-primary);
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .scope-item p {
+      font-size: 0.8rem;
+      color: var(--neutral-gray);
+    }
+
+    /* === NETIQUETTE TABLE === */
+    .netiquette-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 0;
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .netiquette-table th {
+      background: linear-gradient(135deg, #f9cb9c, #ffe6c9);
+      color: var(--navy-primary);
+      padding: 20px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .netiquette-table td {
+      padding: 20px;
+      border-bottom: 1px solid rgba(30, 58, 138, 0.1);
+      color: var(--neutral-dark);
+      vertical-align: top;
+    }
+
+    .netiquette-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .netiquette-table tr:hover {
+      background: rgba(30, 58, 138, 0.03);
+    }
+
+    /* === INTERACTION GUIDELINES === */
+    .guidelines-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+
+    .guideline-card {
+      background: linear-gradient(135deg, rgba(240, 245, 255, 0.8), rgba(219, 234, 254, 0.8));
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .guideline-card h4 {
+      color: var(--navy-primary);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+    }
+
+    /* === LIST STYLES === */
+    .content-list {
+      list-style: none;
+      margin: 25px 0;
+    }
+
+    .content-list li {
+      padding: 12px 0 12px 35px;
+      position: relative;
+      border-bottom: 1px solid rgba(30, 58, 138, 0.05);
+    }
+
+    .content-list li:last-child {
+      border-bottom: none;
+    }
+
+    .content-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 18px;
+      width: 8px;
+      height: 8px;
+      background: var(--navy-light);
+      border-radius: 50%;
+    }
+
+    .content-list strong {
+      color: var(--navy-primary);
+    }
+
+    .highlight-box .content-list li::before {
+      display: none;
+    }
+
+    /* === INTERACTIVE GAME === */
+    .interactive-game {
+      background: linear-gradient(135deg, rgba(240, 245, 255, 0.9), rgba(219, 234, 254, 0.9));
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      border: 2px dashed rgba(30, 58, 138, 0.2);
+      margin: 40px 0;
+    }
+
+    .game-title {
+      font-size: 1.8rem;
+      color: var(--navy-primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .game-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      padding: 18px 35px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 20px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+    }
+
+    .game-link:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(30, 58, 138, 0.35);
+    }
+
+    /* === ACTIVITY SECTION === */
+    .activity-section {
+      background: linear-gradient(135deg, #f0f5ff, #e6f0ff);
+      padding: 60px 40px;
+      border-radius: 20px;
+      margin: 40px 0;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .activity-title {
+      font-size: 1.6rem;
+      color: var(--navy-primary);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .activity-instructions {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .activity-case {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .case-title {
+      font-size: 1.4rem;
+      color: var(--navy-primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .case-question {
+      background: linear-gradient(135deg, rgba(254, 243, 199, 0.8), rgba(253, 230, 138, 0.8));
+      padding: 25px;
+      border-radius: 12px;
+      border-left: 4px solid #f59e0b;
+      margin-top: 20px;
+    }
+
+    .heading-large {
+      font-size: 1.3rem;
+    }
+
+    /* === NAVIGATION BUTTONS === */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 35px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow);
+    }
+
+    .nav-btn-prev {
+      background: var(--white);
+      color: var(--navy-primary);
+      border: 2px solid rgba(30, 58, 138, 0.2);
+    }
+
+    .nav-btn-next {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: var(--white);
+      padding: 60px 40px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.3rem;
+      transition: transform 0.5s ease;
+    }
+
+    .footer-logo:hover .footer-logo-icon {
+      transform: rotateY(180deg);
+    }
+
+    .footer-logo h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .footer-description {
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      transform-style: preserve-3d;
+    }
+
+    .social-link:hover {
+      background: rgba(59, 130, 246, 0.2);
+      color: var(--navy-light);
+      transform: translateY(-5px) translateZ(5px);
+    }
+
+    .footer-column h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: var(--white);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--navy-light);
+      border-radius: 2px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+      transform: translateX(5px);
+    }
+
+    .footer-links a i {
+      font-size: 0.8rem;
+      color: var(--navy-light);
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+      color: #94a3b8;
+    }
+
+    .footer-contact i {
+      color: var(--navy-light);
+      font-size: 1.2rem;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .footer-credit {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .footer-credit i {
+      color: #ef4444;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    .footer-credit strong {
+      color: var(--navy-light);
+      font-weight: 600;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1024px) {
+      .subbab-header-title {
+        font-size: 2.4rem;
+      }
+      
+      .scope-diagram {
+        width: 350px;
+        height: 350px;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+      }
+      
+      .logo {
+        flex: 1;
+      }
+      
+      .hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 30px 30px;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        overflow-y: auto;
+        gap: 5px;
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 5px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      
+      .logo-text {
+        font-size: 1.1rem;
+      }
+      
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      
+      .hero-sub {
+        padding: 120px 20px 30px;
+      }
+      
+      .section {
+        padding: 60px 20px;
+      }
+      
+      .content-body {
+        padding: 30px 20px;
+      }
+      
+      .netiquette-table {
+        display: block;
+        overflow-x: auto;
+      }
+      
+      .scope-diagram {
+        width: 300px;
+        height: 300px;
+      }
+      
+      .scope-center {
+        width: 100px;
+        height: 100px;
+        font-size: 1rem;
+      }
+      
+      .scope-item {
+        width: 120px;
+      }
+      
+      .nav-buttons {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .nav-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      /* Overlay untuk menu mobile */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      /* Close button di dalam menu mobile */
+      .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--navy-primary);
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        z-index: 1001;
+      }
+      
+      .close-menu:hover {
+        background: rgba(30, 58, 138, 0.1);
+      }
+      
+      .subbab-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .subbab-header-title {
+        font-size: 1.8rem;
+      }
+      
+      .subbab-header-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+      }
+      
+      .content-header h3 {
+        font-size: 1.3rem;
+      }
+      
+      .activity-title {
+        font-size: 1.6rem;
+      }
+      
+      .interactive-game {
+        padding: 25px 15px;
+      }
+      
+      .game-title {
+        font-size: 1.5rem;
+      }
+      
+      .game-link {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .scope-diagram {
+        width: 250px;
+        height: 250px;
+      }
+      
+      .scope-center {
+        width: 80px;
+        height: 80px;
+        font-size: 0.9rem;
+      }
+      
+      .scope-item {
+        width: 100px;
+      }
+      
+      .scope-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    .animate-fadeIn {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-laptop-code"></i>
+      </div>
+      <div class="logo-text">Bab 4 Jejak Bermedia Digital</div>
+    </div>
+    
+    <!-- Hamburger Button -->
+    <button class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <nav id="nav-menu">
+     <a href="index.html">Beranda</a>
+      <a href="bab4.html" class="active">Bab 4</a>
+      <a href="bab5.html">Bab 5</a>
+      <a href="ujikompetensi.html">Uji Kompetensi</a>
+      <a href="profilanggi.html">Profil Pengembang</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-sub">
+    <div class="hero-content-sub">
+      
+      <div class="subbab-header">
+        <div class="subbab-header-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <h1 class="subbab-header-title">Sub Bab C: Etika Bermedia Digital</h1>
+      </div>
+      
+      <p class="subbab-subtitle">
+        Memahami prinsip etika digital, netiket, dan cara berinteraksi secara bijak di ruang digital untuk menjadi warganet yang bertanggung jawab.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="content-container">
+      <!-- Etika dalam Bermedia Digital -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-handshake"></i> 1. Etika dalam Bermedia Digital</h3>
+        </div>
+        <div class="content-body">
+          
+          <div class="text-image-row">
+            <div class="text-side">
+              <p class="content-text">
+                Perkembangan komunikasi digital memiliki karakteristik komunikasi global dalam ruang digital. Komunikasi yang terjadi dalam ruang digital akan berinteraksi dengan berbagai macam budaya tanpa melihat batas-batas geografis. Setiap daerah memiliki batas etika yang berbeda. Tentunya hal ini menjadi perhatian bagaimana beretika dalam bermedia digital, sehingga tidak melanggar norma-norma yang ada.
+              </p>
+              
+              <p class="content-text">
+                Dalam konteks komunikasi digital yang global, masyarakat dari berbagai daerah di Nusa Tenggara Timur, yang kaya akan keberagaman suku, bahasa, dan adat istiadat, juga perlu menerapkan etika digital yang selaras dengan nilai-nilai lokal mereka.
+              </p>
+            </div>
+
+            <div class="image-side">
+              <img src="ilustrasi-etika-digital.jpg" 
+                   alt="Ilustrasi Etika Digital" class="content-image">
+            </div>
+          </div>
+
+          <p class="content-text">
+            Etika merupakan aturan sopan santun dalam bertingkah laku yang dijadikan landasan baik individu maupun kelompok. Etika dibagi menjadi dua yaitu:
+          </p>
+          
+          <div class="ethics-categories">
+            <div class="ethics-card">
+              <h4><i class="fas fa-landmark"></i> Etika Tradisional</h4>
+              <p class="content-text">
+                Etika offline yang menyangkut tata cara lama, kebiasaan, dan budaya yang merupakan kesepakatan bersama dari setiap kelompok masyarakat, sehingga menunjukkan apa yang pantas dan tidak pantas sebagai pedoman sikap dan perilaku anggota masyarakat.
+              </p>
+            </div>
+            
+            <div class="ethics-card">
+              <h4><i class="fas fa-globe"></i> Etika Kontemporer</h4>
+              <p class="content-text">
+                Etika elektronik dan online yang menyangkut tata cara, kebiasaan, dan budaya yang berkembang karena teknologi yang memungkinkan pertemuan sosial budaya secara lebih luas dan global.
+              </p>
+            </div>
+          </div>
+
+          <!-- Ruang Lingkup Etika -->
+          <div class="ethics-scope">
+            <div class="scope-diagram">
+              <div class="scope-center">
+                Ruang Lingkup Etika
+              </div>
+              
+              <div class="scope-item top">
+                <div class="scope-icon">
+                  <i class="fas fa-brain"></i>
+                </div>
+                 <h4 class="case-title">Kesadaran</h4>
+              </div>
+              
+              <div class="scope-item right">
+                <div class="scope-icon">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4 class="case-title">Integritas</h4>
+
+              </div>
+              
+              <div class="scope-item bottom">
+                <div class="scope-icon">
+                  <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                 <h4 class="case-title">Kebajikan</h4>
+               
+              </div>
+              
+              <div class="scope-item left">
+                <div class="scope-icon">
+                  <i class="fas fa-balance-scale"></i>
+                </div>
+                <h4 class="case-title">Tanggung Jawab</h4>
+                
+              </div>
+            </div>
+          </div>
+
+          <p class="content-text">
+            <strong>Kesadaran</strong> maksudnya adalah melakukan sesuatu dengan sadar atau memiliki tujuan. Media digital yang cenderung instan seringkali membuat penggunanya melakukan sesuatu 'tanpa sadar' sepenuhnya. Kesadaran sangat diperlukan ketika menggunakan media digital, sehingga individu dapat memahami apa saja yang sedang dilakukannya dengan perangkat digital.
+          </p>
+          
+          <p class="content-text">
+            <strong>Tanggung jawab</strong> berkaitan dengan dampak atau akibat yang ditimbulkan dari suatu tindakan. Maka, bertanggung jawab artinya adalah kemauan menanggung konsekuensi dari tindakan dan perilakunya dalam bermedia digital.
+          </p>
+          
+          <p class="content-text">
+            <strong>Integritas</strong> adalah prinsip kejujuran sehingga individu selalu terhindar dari keinginan dan perbuatan untuk memanipulasi, menipu, berbohong, plagiasi, dan sebagainya, saat bermedia digital.
+          </p>
+          
+          <p class="content-text">
+            <strong>Kebajikan</strong> menyangkut hal-hal yang bernilai kemanfaatan, kemanusiaan, dan kebaikan serta prinsip penggunaan media digital untuk meningkatkan derajat sesama manusia atau kualitas kehidupan bersama. Empat ruang lingkup etika tersebut menjadi self-control (kontrol diri) setiap individu dalam mengakses, berinteraksi, berpartisipasi, dan berkolaborasi di ruang digital, sehingga media digital benar-benar bisa dimanfaatkan secara positif dan mampu menghargai privasi orang lain.
+          </p>
+        </div>
+      </div>
+
+      <!-- Paham Etika Bermedia Digital -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-users"></i> 2. Paham Etika Bermedia Digital</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Dalam berinteraksi di ruang digital, kita sering mendengar istilah netizen. Apakah kalian tahu apa itu netizen? Istilah netizen merupakan gabungan dari 'internet' dan 'citizen' yang merupakan sebutan bagi pengguna internet, bermakna sama dengan warga internet atau 'warganet'. Sebagai warganet harus tahu aturan dan tata krama yang berlaku selama berinteraksi di ruang digital.
+          </p>
+          
+          <p class="content-text">
+            Sedangkan <strong>netiket (nettiquette)</strong> merupakan singkatan dari internet etiquette atau etiket yang berlaku dalam menggunakan internet. Kita sering menggunakan internet, tentunya kita harus paham netiket saat berinteraksi di ruang digital. Jangan sampai orang menganggap kita tidak beretika, karena unggahan atau postingan yang kita buat.
+          </p>
+          
+          <h4 class="case-title">
+            <i class="fas fa-list-check"></i> Netiket yang Perlu Diperhatikan:
+          </h4>
+          
+          <div class="guidelines-container">
+            <div class="guideline-card">
+              <h4><i class="fas fa-heart"></i> Empati dan Perlakuan</h4>
+              <ul class="content-list">
+                <li>Perlakukan orang lain dengan empati; berinteraksi dengan sesama manusia, bukan benda mati</li>
+                <li>Bersikaplah pemaaf, berusaha memahami sudut pandang orang lain</li>
+              </ul>
+            </div>
+            
+            <div class="guideline-card">
+              <h4><i class="fas fa-clock"></i> Pikir Sebelum Bertindak</h4>
+              <ul class="content-list">
+                <li>Berpikir sebelum bertindak (posting/komentar), karena jejak digital bersifat abadi</li>
+                <li>Jangan membuang waktu atau kuota orang lain; bijak dalam berbagi informasi atau berkas besar</li>
+              </ul>
+            </div>
+            
+            <div class="guideline-card">
+              <h4><i class="fas fa-language"></i> Bahasa dan Komunikasi</h4>
+              <ul class="content-list">
+                <li>Selalu gunakan bahasa yang sopan sebagai cerminan kepribadian</li>
+                <li>Bersikaplah sebagai pembawa damai dan hindari terpancing dalam diskusi yang tidak sehat</li>
+              </ul>
+            </div>
+            
+            <div class="guideline-card">
+              <h4><i class="fas fa-lock"></i> Privasi dan Konten</h4>
+              <ul class="content-list">
+                <li>Gunakan internet dan media digital untuk berbagi ilmu keahlian yang positif</li>
+                <li>Jaga dan hormati privasi diri sendiri maupun orang lain</li>
+                <li>Hindari sikap sombong dan penyalahgunaan kelebihan atau kekuasaan untuk menyerang orang lain</li>
+              </ul>
+            </div>
+          </div>
+          </div>
+          </div>
+
+
+      <!-- Berinteraksi dengan Bijak -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-comment-dots"></i> 3. Berinteraksi dengan Bijak</h3>
+        </div>
+        <div class="content-body">
+        <div class="text-image-row">
+          <div class="text-side">
+            <p class="content-text">
+              Dengan adanya perkembangan teknologi, interaksi dapat dilakukan tidak hanya dengan bertatap muka secara langsung tetapi juga melalui media perangkat digital yang terkoneksi ke internet. Ciri khas dari interaksi di ruang digital adalah penggunaan comment (memberi komentar), like (memberikan tanda suka), dan emoticon (memberikan tanda bergambar/emoji). Saat berinteraksi dengan pengguna internet lainnya, kita harus memperhatikan netiket serta dampak dari interaksi yang dilakukan.
+            </p>
+          </div>
+
+          <div class="image-side">
+            <img src="interaksi-digital.png"
+                 alt="Ilustrasi Berinteraksi di Media Digital"
+                 class="content-image">
+          </div>
+        </div>
+
+          <!-- Cara Bijak dalam Aplikasi Percakapan -->
+          <h4 class="case-title" style="margin-top: 40px;">
+            <i class="fas fa-comments"></i> Cara Bijak dalam Berinteraksi pada Aplikasi Percakapan
+          </h4>
+          
+          <table class="netiquette-table">
+            <thead>
+              <tr>
+                <th>Aspek</th>
+                <th>Etika yang Harus Diperhatikan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Privasi Kontak</strong></td>
+                <td>Jaga privasi; jangan berikan nomor orang lain tanpa izin</td>
+              </tr>
+              <tr>
+                <td><strong>Pengenalan Diri</strong></td>
+                <td>Selalu perkenalkan diri dan sebutkan sumber kontak saat menghubungi orang asing</td>
+              </tr>
+              <tr>
+                <td><strong>Grup Percakapan</strong></td>
+                <td>Minta izin terlebih dahulu sebelum memasukkan seseorang ke dalam grup</td>
+              </tr>
+              <tr>
+                <td><strong>Pesan Berantai</strong></td>
+                <td>Jangan meneruskan pesan yang belum terverifikasi kebenarannya (berhati-hati dengan hoax)</td>
+              </tr>
+              <tr>
+                <td><strong>Screenshot</strong></td>
+                <td>Jika mengambil tangkapan layar, jangan gunakan untuk merugikan orang lain</td>
+              </tr>
+              <tr>
+                <td><strong>Pengiriman Foto</strong></td>
+                <td>Pastikan foto yang dikirim tidak melanggar etika kesopanan/kesusilaan</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <h4 class="case-title">
+            <i class="fas fa-check-circle"></i> Panduan Berinteraksi di Media Sosial
+          </h4>
+          
+          <table class="netiquette-table">
+            <thead>
+              <tr>
+                <th>Poin</th>
+                <th>Cara Bijak</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Bahasa</strong></td>
+                <td>Gunakan bahasa yang baik dan sopan</td>
+              </tr>
+              <tr>
+                <td><strong>Konten (Foto/Info/Video)</strong></td>
+                <td>Unggah konten yang menjunjung nilai kesopanan dan tidak mengandung SARA</td>
+              </tr>
+              <tr>
+                <td><strong>Emoji/Reaksi</strong></td>
+                <td>Bersikap bijaksana saat memberikan tanda emoji atau reaksi (seperti like)</td>
+              </tr>
+              <tr>
+                <td><strong>Berbagi/Share</strong></td>
+                <td>Bersikap bijaksana dalam meneruskan informasi, foto, atau video</td>
+              </tr>
+              <tr>
+                <td><strong>Komentar</strong></td>
+                <td>Bersikap bijaksana dalam memberikan komentar</td>
+              </tr>
+              <tr>
+                <td><strong>Keutuhan Konten</strong></td>
+                <td>Jika berbagi, pastikan konten dalam bentuk yang utuh (tidak dipotong) untuk menghindari salah makna</td>
+              </tr>
+              <tr>
+                <td><strong>Screenshot</strong></td>
+                <td>Jangan gunakan screenshot percakapan untuk merugikan orang lain</td>
+              </tr>
+              <tr>
+                <td><strong>Hak Cipta</strong></td>
+                <td>Selalu hormati hak cipta orang lain</td>
+              </tr>
+              <tr>
+                <td><strong>Pelaporan</strong></td>
+                <td>Laporkan akun yang bermasalah dan meresahkan</td>
+              </tr>
+              <tr>
+                <td><strong>Informasi Pribadi</strong></td>
+                <td>Jangan berikan informasi pribadi (seperti alamat, nomor KTP) saat berinteraksi di media sosial</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+         </div>
+        
+
+          <!-- Interactive Game -->
+        <div class="activity-section">
+        <h3 class="activity-title">
+          <i class="fas fa-user"></i>  Aktivitas Individu : Game Interaktif Berpikir Bijak dalam Dunia Digital
+        </h3>
+             <div class="interactive-game">
+            <p class="content-text">
+              Klik link di bawah ini untuk menguji kemampuanmu dalam mengambil keputusan bijak saat menghadapi masalah di dunia digital. Pada game ini akan diberikan kasus dan pilihan. Nah kalian harus memilih satu pilihan yang tepat.
+            </p>
+            <a href="https://anggiclementine02.github.io/Dampak_Sosial_Informatika/smartonlinedecisions.html" target="_blank" class="game-link">
+              <i class="fas fa-play-circle"></i> Mainkan Game Pengambilan Keputusan
+            </a>
+          </div>
+        </div>
+     
+      <!-- Aktivitas Individu -->
+      <div class="activity-section">
+        <h3 class="activity-title">
+          <i class="fas fa-users"></i> Aktivitas Kelompok: Pengkajian Etika Bermedia Digital Baik atau Kurang Baik
+        </h3>
+        
+        <div class="activity-instructions">
+          <p class="content-text">
+            Kalian akan dibagi menjadi 4 kelompok. Setiap kelompok diminta untuk menganalisis kasus yang diberikan dan menentukan apakah perilaku dalam kasus tersebut merupakan etika bermedia digital yang baik atau kurang baik.
+          </p>
+        </div>
+        
+        <!-- Kasus 1 -->
+        <div class="activity-case">
+          <h4 class="case-title">
+            <i class="fas fa-comment"></i> Kasus 1: Komentar di Media Sosial
+          </h4>
+          
+          <p class="content-text">
+            <strong>Deskripsi:</strong> Seorang siswa menulis komentar kasar di postingan foto teman sekelasnya yang sedang berlibur di Pantai Lasiana. Komentar tersebut berisi ejekan tentang penampilan fisik temannya.
+          </p>
+          
+          <div class="case-question">
+            <p class="content-text">
+              <strong>Analisis:</strong> Apakah ini merupakan etika yang baik atau kurang baik? Jelaskan alasanmu dan bagaimana perasaan teman yang menjadi korban komentar tersebut.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Kasus 2 -->
+        <div class="activity-case">
+          <h4 class="case-title">
+            <i class="fas fa-share-alt"></i> Kasus 2: Berbagi Informasi Pribadi
+          </h4>
+          
+          <p class="content-text">
+            <strong>Deskripsi:</strong> Seorang siswa mengambil screenshot percakapan pribadi di grup WhatsApp kelas tanpa izin, kemudian membagikannya ke grup lain di media sosial. Percakapan tersebut berisi rahasia pribadi temannya.
+          </p>
+          
+          <div class="case-question">
+            <p class="content-text">
+              <strong>Analisis:</strong> Apakah ini merupakan etika yang baik atau kurang baik? Jelaskan prinsip etika digital apa yang dilanggar dan dampak yang mungkin terjadi.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Kasus 3 -->
+        <div class="activity-case">
+          <h4 class="case-title">
+            <i class="fas fa-users"></i> Kasus 3: Menambahkan Orang ke Grup
+          </h4>
+          
+          <p class="content-text">
+            <strong>Deskripsi:</strong> Seorang siswa menambahkan teman sekelasnya ke grup media sosial tanpa meminta izin terlebih dahulu. Grup tersebut berisi pembahasan yang tidak sesuai dengan nilai-nilai kesopanan.
+          </p>
+          
+          <div class="case-question">
+            <p class="content-text">
+              <strong>Analisis:</strong> Analisis tindakan ini berdasarkan prinsip kesadaran dan tanggung jawab dalam etika digital.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Kasus 4 -->
+        <div class="activity-case">
+          <h4 class="case-title">
+            <i class="fas fa-forward"></i> Kasus 4: Meneruskan Pesan Berantai
+          </h4>
+          
+          <p class="content-text">
+            <strong>Deskripsi:</strong> Seorang siswa menerima pesan berantai yang berisi informasi tentang "beras gratis dari pemerintah" tanpa memverifikasi kebenarannya terlebih dahulu. Ia langsung meneruskan pesan tersebut ke 10 grup WhatsApp yang berbeda.
+          </p>
+          
+          <div class="case-question">
+            <p class="content-text">
+              <strong>Analisis:</strong> Evaluasi tindakan ini berdasarkan prinsip integritas dan kebajikan dalam etika digital.
+            </p>
+          </div>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, rgba(220, 252, 231, 0.8), rgba(187, 247, 208, 0.8)); padding: 25px; border-radius: 12px; margin-top: 30px; border: 2px solid rgba(34, 197, 94, 0.2);">
+          <h4 style="color: #065f46; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-clipboard-check"></i> Lembar Jawaban
+          </h4>
+          <p class="content-text">
+            <strong>Hasil merenungkan, jika menemukan etika yang kurang baik:</strong>
+          </p>
+          <p class="content-text">
+            Setelah menganalisis kasus-kasus di atas, renungkan bagaimana perasaan yang menjadi korban dari etika digital yang kurang baik. Tuliskan refleksimu tentang pentingnya menerapkan etika digital dalam kehidupan sehari-hari, khususnya sebagai siswa di Nusa Tenggara Timur yang memiliki budaya dan nilai-nilai luhur.
+          </p>
+          <p class="content-text">
+            <strong>Pertanyaan refleksi:</strong>
+          </p>
+          <ul class="content-list">
+            <li>Bagaimana perasaanmu jika menjadi korban dari etika digital yang kurang baik?</li>
+            <li>Nilai-nilai budaya NTT apa yang dapat diterapkan dalam beretika digital?</li>
+            <li>Apa komitmen pribadimu untuk menjadi warganet yang lebih bertanggung jawab?</li>
+            <li>Bagaimana cara mengajak teman-teman untuk bersama-sama menerapkan etika digital yang baik?</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="nav-buttons">
+        <a href="bab4-B.html" class="nav-btn nav-btn-prev">
+          <i class="fas fa-arrow-left"></i> Kembali ke Sub Bab B
+        </a>
+        <a href="D.cyberbullying.html" class="nav-btn nav-btn-next">
+          Lanjut ke Sub Bab D: Cyberbullying <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h3>Bahan Ajar Informatika</h3>
+          </div>
+          <p class="footer-description">
+            Platform pembelajaran digital berbasis Kurikulum Merdeka untuk mata pelajaran Informatika SMP Kelas 8
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Menu Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+            <li><a href="bab4.html"><i class="fas fa-chevron-right"></i> Bab 4</a></li>
+            <li><a href="bab5.html"><i class="fas fa-chevron-right"></i> Bab 5</a></li>
+            <li><a href="ujikompetensi.html"><i class="fas fa-chevron-right"></i> Uji Kompetensi</a></li>
+            <li><a href="profilanggi.html"><i class="fas fa-chevron-right"></i> Profil Pengembang</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Kontak Pengembang</h4>
+          <ul class="footer-contact">
+            <li>
+              <i class="fas fa-envelope"></i>
+              <div>anggiclementine02@gmail.com</div>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <div>085804629875</div>
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <div>Kupang, Nusa Tenggara Timur</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Bahan Ajar Digital Informatika by Anggi Clementine. All Rights Reserved.</p>
+        <p class="footer-credit">
+          <i class="fas fa-heart"></i> Dikembangkan untuk <strong>Generasi Digital NTT yang Berbudaya</strong>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Hamburger menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('nav-menu');
+      const body = document.body;
+      
+      // Buat overlay element
+      const overlay = document.createElement('div');
+      overlay.className = 'nav-overlay';
+      body.appendChild(overlay);
+      
+      // Buat close button untuk mobile
+      const closeButton = document.createElement('button');
+      closeButton.className = 'close-menu';
+      closeButton.innerHTML = '<i class="fas fa-times"></i>';
+      closeButton.setAttribute('aria-label', 'Tutup menu');
+      navMenu.appendChild(closeButton);
+      
+      // Toggle menu saat hamburger diklik
+      hamburger.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        body.style.overflow = 'hidden';
+      });
+      
+      // Tutup menu saat overlay diklik
+      overlay.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+      });
+      
+      // Tutup menu saat close button diklik
+      closeButton.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+      });
+      
+      // Tutup menu saat link di dalam menu diklik
+      const navLinks = navMenu.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.style.overflow = '';
+        });
+      });
+      
+      // Tutup menu saat window di-resize ke ukuran besar
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.style.overflow = '';
+        }
+      });
+    });
+
+    // Animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeIn');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const animatedElements = document.querySelectorAll('.content-block, .interactive-game, .activity-section');
+      animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

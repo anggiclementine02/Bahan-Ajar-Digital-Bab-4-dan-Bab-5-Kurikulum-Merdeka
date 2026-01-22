@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Uji Kompetensi - Bahan Ajar Informatika</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy-primary: #1e3a8a;
+      --navy-secondary: #1e40af;
+      --navy-light: #3b82f6;
+      --navy-accent: #60a5fa;
+      --neutral-dark: #1f2937;
+      --neutral-light: #f8fafc;
+      --neutral-gray: #6b7280;
+      --white: #ffffff;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--neutral-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* === HEADER === */
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px) saturate(180%);
+      -webkit-backdrop-filter: blur(15px) saturate(180%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    header.scrolled {
+      padding: 12px 40px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.3s ease;
+      text-decoration: none;
+    }
+
+    .logo:hover {
+      transform: translateY(-2px);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--neutral-gray);
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 10px 18px;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.08), transparent);
+      transition: left 0.6s ease;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      color: var(--navy-primary);
+      background: rgba(30, 58, 138, 0.04);
+    }
+
+    nav a.active {
+      color: var(--white);
+      background: var(--navy-primary);
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    /* === UJI KOMPETENSI CONTENT === */
+    .uji-kompetensi-section {
+      padding: 140px 40px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      flex: 1;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+      border-radius: 2px;
+    }
+
+    .section-title p {
+      font-size: 1.15rem;
+      color: var(--neutral-gray);
+      max-width: 600px;
+      margin: 20px auto 0;
+    }
+
+    /* === CARD CONTAINER === */
+    .card-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    /* === CARD STYLES === */
+    .card {
+      width: 100%;
+      max-width: 500px;
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-15px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-header {
+      padding: 35px 35px 25px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .card:hover .card-header::before {
+      transform: translateX(100%);
+    }
+
+    .card-bab {
+      font-size: 1rem;
+      font-weight: 600;
+      opacity: 0.9;
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+    }
+
+    .card-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .card-subtitle {
+      font-size: 1rem;
+      opacity: 0.85;
+      font-weight: 400;
+    }
+
+    .card-content {
+      padding: 30px 35px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-description {
+      color: var(--neutral-gray);
+      line-height: 1.7;
+      margin-bottom: 25px;
+      flex: 1;
+    }
+
+    .card-details {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--neutral-dark);
+      font-size: 0.95rem;
+    }
+
+    .detail-item i {
+      color: var(--navy-light);
+      width: 20px;
+      font-size: 1rem;
+    }
+
+    .card-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 30px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      margin-top: auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .card-button:hover::before {
+      left: 100%;
+    }
+
+    .card-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(30, 58, 138, 0.25);
+    }
+
+    /* === HAMBURGER MENU === */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--navy-primary);
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    .hamburger:hover {
+      background: rgba(30, 58, 138, 0.1);
+    }
+
+    /* Overlay dan close button default hidden */
+    .nav-overlay,
+    .close-menu {
+      display: none;
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: var(--white);
+      padding: 60px 40px 30px;
+      position: relative;
+      overflow: hidden;
+      margin-top: auto;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.3rem;
+      transition: transform 0.5s ease;
+    }
+
+    .footer-logo:hover .footer-logo-icon {
+      transform: rotateY(180deg);
+    }
+
+    .footer-logo h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .footer-description {
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      background: rgba(59, 130, 246, 0.2);
+      color: var(--navy-light);
+      transform: translateY(-5px);
+    }
+
+    .footer-column h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: var(--white);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--navy-light);
+      border-radius: 2px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+      transform: translateX(5px);
+    }
+
+    .footer-links a i {
+      font-size: 0.8rem;
+      color: var(--navy-light);
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+      color: #94a3b8;
+    }
+
+    .footer-contact i {
+      color: var(--navy-light);
+      font-size: 1.2rem;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .footer-credit {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .footer-credit i {
+      color: #ef4444;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    .footer-credit strong {
+      color: var(--navy-light);
+      font-weight: 600;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+      }
+      
+      .logo {
+        flex: 1;
+      }
+      
+      .hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 30px 30px;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        overflow-y: auto;
+        gap: 5px;
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 5px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      
+      .logo-text {
+        font-size: 1.1rem;
+      }
+      
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      
+      .uji-kompetensi-section {
+        padding: 120px 20px 60px;
+      }
+      
+      .section-title h1 {
+        font-size: 2.2rem;
+      }
+      
+      .card {
+        max-width: 100%;
+      }
+      
+      .card-container {
+        gap: 30px;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      /* Overlay untuk menu mobile */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      /* Close button di dalam menu mobile */
+      .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--navy-primary);
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        z-index: 1001;
+      }
+      
+      .close-menu:hover {
+        background: rgba(30, 58, 138, 0.1);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-title h1 {
+        font-size: 1.8rem;
+      }
+      
+      .card-header {
+        padding: 25px 25px 20px;
+      }
+      
+      .card-title {
+        font-size: 1.5rem;
+      }
+      
+      .card-content {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-laptop-code"></i>
+      </div>
+      <div class="logo-text">Bahan Ajar Informatika</div>
+    </a>
+    
+    <!-- Hamburger Button -->
+    <button class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <nav id="nav-menu">
+      <a href="index.html">Beranda</a>
+      <a href="index.html#daftar-isi">Daftar Isi</a>
+      <a href="bab4.html">Bab 4</a>
+      <a href="bab5.html">Bab 5</a>
+      <a href="ujikompetensi.html" class="active">Uji Kompetensi</a>
+      <a href="profilanggi.html">Profil Pengembang</a>
+    </nav>
+  </header>
+
+  <!-- Uji Kompetensi Section -->
+  <section class="uji-kompetensi-section">
+    <div class="section-title">
+      <h1>Uji Kompetensi</h1>
+      <p>Pilih salah satu uji kompetensi di bawah ini untuk mengukur pemahaman Anda</p>
+    </div>
+    
+    <div class="card-container">
+      <!-- Card 1: Uji Kompetensi Bab 4 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-bab">BAB 4</div>
+          <div class="card-title">Jejak Bermedia Digital</div>
+          <div class="card-subtitle">Uji Kompetensi</div>
+        </div>
+        
+        <div class="card-content">
+          <p class="card-description">
+            Uji pemahaman Anda tentang jejak digital, media sosial, etika bermedia digital, dan cara menghadapi cyberbullying. 
+            Tes ini mencakup seluruh materi Bab 4 dengan berbagai jenis soal untuk mengukur tingkat penguasaan konsep.
+          </p>
+          
+          <div class="card-details">
+            <div class="detail-item">
+              <i class="fas fa-question-circle"></i>
+              <span>20 soal pilihan ganda</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-clock"></i>
+              <span>Waktu: 60 menit</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-chart-bar"></i>
+              <span>Tingkat kesulitan: Menengah</span>
+            </div>
+          </div>
+          
+          <a href="uji-kompetensi-bab4.html" class="card-button">
+            <i class="fas fa-play-circle"></i>
+            Mulai Uji Kompetensi Bab 4
+          </a>
+        </div>
+      </div>
+      
+      <!-- Card 2: Uji Kompetensi Bab 5 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-bab">BAB 5</div>
+          <div class="card-title">Pemanfaatan Perangkat Digital</div>
+          <div class="card-subtitle">Uji Kompetensi</div>
+        </div>
+        
+        <div class="card-content">
+          <p class="card-description">
+            Evaluasi pemahaman Anda tentang komponen sistem komputer, jaringan komputer, keamanan internet, 
+            dan penggunaan aplikasi produktif. Tes ini dirancang untuk menguji penerapan konsep dalam situasi praktis.
+          </p>
+          
+          <div class="card-details">
+            <div class="detail-item">
+              <i class="fas fa-question-circle"></i>
+              <span>20 soal pilihan ganda</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-clock"></i>
+              <span>Waktu: 60 menit</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-chart-bar"></i>
+              <span>Tingkat kesulitan: Menengah</span>
+            </div>
+          </div>
+          
+          <a href="uji-kompetensi-bab5.html" class="card-button">
+            <i class="fas fa-play-circle"></i>
+            Mulai Uji Kompetensi Bab 5
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h3>Bahan Ajar Informatika</h3>
+          </div>
+          <p class="footer-description">
+            Platform pembelajaran digital berbasis Kurikulum Merdeka untuk mata pelajaran Informatika SMP Kelas 8 dengan fokus pada nilai-nilai budaya Nusa Tenggara Timur.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Menu Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+            <li><a href="bab4.html"><i class="fas fa-chevron-right"></i> Bab 4</a></li>
+            <li><a href="bab5.html"><i class="fas fa-chevron-right"></i> Bab 5</a></li>
+            <li><a href="ujikompetensi.html"><i class="fas fa-chevron-right"></i> Uji Kompetensi</a></li>
+            <li><a href="profilanggi.html"><i class="fas fa-chevron-right"></i> Profil Pengembang</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Kontak Pengembang</h4>
+          <ul class="footer-contact">
+            <li>
+              <i class="fas fa-envelope"></i>
+              <div>anggiclementine02@gmail.com</div>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <div>085804629875</div>
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <div>Kupang, Nusa Tenggara Timur</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Bahan Ajar Digital Informatika by Anggi Clementine. All Rights Reserved.</p>
+        <p class="footer-credit">
+          <i class="fas fa-heart"></i> Dikembangkan untuk <strong>Generasi Digital NTT yang Berbudaya</strong>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Hamburger menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('nav-menu');
+      const body = document.body;
+      
+      // Buat overlay element
+      const overlay = document.createElement('div');
+      overlay.className = 'nav-overlay';
+      body.appendChild(overlay);
+      
+      // Buat close button untuk mobile
+      const closeButton = document.createElement('button');
+      closeButton.className = 'close-menu';
+      closeButton.innerHTML = '<i class="fas fa-times"></i>';
+      closeButton.setAttribute('aria-label', 'Tutup menu');
+      navMenu.appendChild(closeButton);
+      
+      // Toggle menu saat hamburger diklik
+      hamburger.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        body.style.overflow = 'hidden';
+      });
+      
+      // Tutup menu saat overlay diklik
+      overlay.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+      });
+      
+      // Tutup menu saat close button diklik
+      closeButton.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+      });
+      
+      // Tutup menu saat link di dalam menu diklik
+      const navLinks = navMenu.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.style.overflow = '';
+        });
+      });
+      
+      // Tutup menu saat window di-resize ke ukuran besar
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.style.overflow = '';
+        }
+      });
+    });
+
+    // Link simulation for demo purposes
+    document.querySelectorAll('.card-button').forEach(button => {
+      button.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') {
+          e.preventDefault();
+          // For demo - show alert if file doesn't exist
+          const cardTitle = this.closest('.card').querySelector('.card-title').textContent;
+          alert(`Ini adalah demo. Link akan mengarah ke: ${href}\n\n${cardTitle}`);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

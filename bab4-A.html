@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sub Bab A: Jejak Digital - Bab 4: Jejak Bermedia Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --navy-primary: #1e3a8a;
+      --navy-secondary: #1e40af;
+      --navy-light: #3b82f6;
+      --navy-accent: #60a5fa;
+      --neutral-dark: #1f2937;
+      --neutral-light: #f8fafc;
+      --neutral-gray: #6b7280;
+      --white: #ffffff;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+      --shadow-3d: 0 25px 50px rgba(30, 58, 138, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--neutral-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* === HEADER === */
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px) saturate(180%);
+      -webkit-backdrop-filter: blur(15px) saturate(180%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    header.scrolled {
+      padding: 12px 40px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: translateY(-2px);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--neutral-gray);
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 10px 18px;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.08), transparent);
+      transition: left 0.6s ease;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      color: var(--navy-primary);
+      background: rgba(30, 58, 138, 0.04);
+    }
+
+    nav a.active {
+      color: var(--white);
+      background: var(--navy-primary);
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    /* === HERO SECTION === */
+    .hero-sub {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 40px 40px;
+      background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 50%, #dbeafe 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-sub::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.05) 0%, transparent 70%);
+      top: -150px;
+      right: -100px;
+    }
+
+    .hero-sub::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .hero-content-sub {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy-primary);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: rgba(30, 58, 138, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(30, 58, 138, 0.12);
+      transform: translateX(-5px);
+    }
+
+    .subbab-header {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .subbab-header-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 2.2rem;
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+    }
+
+    .subbab-header-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      line-height: 1.1;
+    }
+
+    .subbab-subtitle {
+      font-size: 1.3rem;
+      color: var(--neutral-gray);
+      max-width: 800px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    /* === CONTENT SECTIONS === */
+    .section {
+      padding: 80px 40px;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+      border-radius: 2px;
+    }
+
+    .section-title p {
+      font-size: 1.15rem;
+      color: var(--neutral-gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* === CONTENT CONTAINER === */
+    .content-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    /* === CONTENT BLOCK === */
+    .content-block {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .content-block:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .content-header {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      padding: 25px 40px;
+      position: relative;
+    }
+
+    .content-header h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .content-body {
+      padding: 40px;
+    }
+
+    .content-text {
+      font-size: 1.1rem;
+      color: var(--neutral-dark);
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .content-text:last-child {
+      margin-bottom: 0;
+    }
+
+ 
+    /* === IMAGE CONTAINER === */
+    .image-container {
+      margin: 0px 0;
+      text-align: center;
+    }
+
+    .content-image {
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .content-image:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-3d);
+    }
+
+    .image-caption {
+      font-style: italic;
+      color: var(--neutral-gray);
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+
+
+    /* === TWO COLUMN LAYOUT === */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin: 40px 0;
+    }
+
+    .column-card {
+      background: linear-gradient(135deg, rgba(240, 245, 255, 0.8), rgba(219, 234, 254, 0.8));
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .column-card h4 {
+      font-size: 1.3rem;
+      color: var(--navy-primary);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .column-image {
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.15);
+    }
+
+        /* Tampilan normal (desktop & tablet) */
+        .illustration-text {
+          display: flex;
+          align-items: flex-start;
+          gap: 15px;
+        }
+
+        .illustration-text img {
+          width: 170px;
+          flex-shrink: 0;
+          order: 2;   /* gambar di kanan */
+        }
+
+        .illustration-text p {
+          margin: 0;
+          order: 1;
+          text-align: justify;
+        }
+
+        /* Tampilan HP: gambar turun ke bawah */
+        @media (max-width: 600px) {
+          .illustration-text {
+            flex-direction: column;
+          }
+
+          .illustration-text img {
+            order: 3;
+            width: 300px;
+            margin: 10px auto 0;  /* center + jarak */
+          }
+
+          .illustration-text p {
+            order: 1;
+          }
+        }
+
+
+    /* === LIST STYLES === */
+    .content-list {
+      list-style: none;
+      margin: 25px 0;
+    }
+
+    .content-list li {
+      padding: 12px 0 12px 35px;
+      position: relative;
+      border-bottom: 1px solid rgba(30, 58, 138, 0.05);
+    }
+
+    .content-list li:last-child {
+      border-bottom: none;
+    }
+
+    .content-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 18px;
+      width: 8px;
+      height: 8px;
+      background: var(--navy-light);
+      border-radius: 50%;
+    }
+
+    .content-list strong {
+      color: var(--navy-primary);
+    }
+
+    /* === INTERACTIVE GAME === */
+    .interactive-game {
+      background: linear-gradient(135deg, rgba(240, 245, 255, 0.9), rgba(219, 234, 254, 0.9));
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      border: 2px dashed rgba(30, 58, 138, 0.2);
+      margin: 10px 0;
+    }
+
+    .game-title {
+      font-size: 1.8rem;
+      color: var(--navy-primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .game-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      padding: 18px 35px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 20px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+    }
+
+    .game-link:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(30, 58, 138, 0.35);
+    }
+
+    /* === ACTIVITY SECTION === */
+    .activity-section {
+      background: linear-gradient(135deg, #f0f5ff, #e6f0ff);
+      padding: 60px 40px;
+      border-radius: 20px;
+      margin: 0px 0;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .activity-title {
+      font-size: 1.6rem;
+      color: var(--navy-primary);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .activity-instructions {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .activity-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .activity-table th {
+      background: linear-gradient(to top, #f9cb9c, #ffe6c9);
+      color: var(--navy-primary);
+      padding: 20px;
+      text-align: left;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 255);
+    }
+
+    .activity-table td {
+      padding: 20px;
+      border-bottom: 1px solid rgba(30, 58, 138, 0.1);
+      color: var(--neutral-dark);
+    }
+
+    .activity-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .activity-table tr:hover {
+      background: rgba(30, 58, 138, 0.03);
+    }
+
+    /* === NAVIGATION BUTTONS === */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 35px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow);
+    }
+
+    .nav-btn-prev {
+      background: var(--white);
+      color: var(--navy-primary);
+      border: 2px solid rgba(30, 58, 138, 0.2);
+    }
+
+    .nav-btn-next {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+      /* === FOOTER === */
+      footer {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: var(--white);
+        padding: 60px 40px 30px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+      }
+
+      .footer-container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 50px;
+        margin-bottom: 50px;
+      }
+
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .footer-logo-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        font-size: 1.3rem;
+        transition: transform 0.5s ease;
+      }
+
+      .footer-logo:hover .footer-logo-icon {
+        transform: rotateY(180deg);
+      }
+
+      .footer-logo h3 {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--white);
+      }
+
+      .footer-description {
+        color: #94a3b8;
+        line-height: 1.6;
+        margin-bottom: 25px;
+      }
+
+      .footer-social {
+        display: flex;
+        gap: 15px;
+      }
+
+      .social-link {
+        width: 45px;
+        height: 45px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #94a3b8;
+        font-size: 1.1rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        transform-style: preserve-3d;
+      }
+
+      .social-link:hover {
+        background: rgba(59, 130, 246, 0.2);
+        color: var(--navy-light);
+        transform: translateY(-5px) translateZ(5px);
+      }
+
+      .footer-column h4 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 25px;
+        color: var(--white);
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h4::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--navy-light);
+        border-radius: 2px;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 12px;
+      }
+
+      .footer-links a {
+        color: #94a3b8;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer-links a:hover {
+        color: var(--white);
+        transform: translateX(5px);
+      }
+
+      .footer-links a i {
+        font-size: 0.8rem;
+        color: var(--navy-light);
+      }
+
+      .footer-contact li {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+        color: #94a3b8;
+      }
+
+      .footer-contact i {
+        color: var(--navy-light);
+        font-size: 1.2rem;
+        margin-top: 3px;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #94a3b8;
+        font-size: 0.9rem;
+      }
+
+      .footer-credit {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      .footer-credit i {
+        color: #ef4444;
+        animation: heartbeat 1.5s ease-in-out infinite;
+      }
+
+      .footer-credit strong {
+        color: var(--navy-light);
+        font-weight: 600;
+      }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1024px) {
+      .subbab-header-title {
+        font-size: 2.4rem;
+      }
+      
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+          @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: row;
+        gap: 0;
+      }
+
+      nav {
+        width: auto;
+        overflow: visible;
+        padding-bottom: 0;
+      }
+
+      .hero-sub {
+        padding: 120px 20px 30px;
+      }
+
+      .subbab-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+
+      .subbab-header-title {
+        font-size: 2rem;
+      }
+
+      .section {
+        padding: 60px 20px;
+      }
+
+      .content-body {
+        padding: 30px 20px;
+      }
+
+      .activity-table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .nav-buttons {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .nav-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+
+    @media (max-width: 480px) {
+      .subbab-header-title {
+        font-size: 1.8rem;
+      }
+      
+      .subbab-header-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+      }
+      
+      .content-header h3 {
+        font-size: 1.3rem;
+      }
+      
+      .activity-title {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    .animate-fadeIn {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+       .menu-toggle {
+      display: none;
+      margin-left: auto;
+      font-size: 1.6rem;
+      cursor: pointer;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .menu-toggle i {
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        padding: 100px 20px 20px;
+        gap: 10px;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        transition: right 0.4s ease;
+        z-index: 999;
+      }
+
+      nav.active {
+        right: 0;
+      }
+
+      nav a {
+        width: 100%;
+        padding: 14px 18px;
+      }
+    }
+
+        /* Layout gambar kecil di samping teks (Jejak Digital - atas) */
+    .digital-trace-layout {
+      display: flex;
+      gap: 25px;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
+
+    /* Gambar ilustrasi kecil */
+    .digital-trace-image {
+      width: 490px;
+      height: auto;
+      border-radius: 14px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.15);
+    }
+
+    /* Teks */
+    .digital-trace-text {
+      flex: 1;
+    }
+
+    /* Responsive HP */
+    @media (max-width: 768px) {
+      .digital-trace-layout {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .digital-trace-image {
+        width: 500px;
+        margin-bottom: 15px;
+      }
+    }
+
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-laptop-code"></i>
+      </div>
+      <div class="logo-text">Bab 4 Jejak Bermedia Digital</div>
+    </div>
+    
+    <!-- Tombol Hamburger (Mobile) -->
+  <div class="menu-toggle" id="menuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+    <nav nav id="navMenu">
+      <a href="index.html">Beranda</a>
+      <a href="bab4.html" class="active">Bab 4</a>
+      <a href="bab5.html">Bab 5</a>
+      <a href="ujikompetensi.html">Uji Kompetensi</a>
+      <a href="profilanggi.html">Profil Pengembang</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-sub">
+    <div class="hero-content-sub">
+      
+      <div class="subbab-header">
+        <div class="subbab-header-icon">
+          <i class="fas fa-shoe-prints"></i>
+        </div>
+        <h1 class="subbab-header-title">Sub Bab A: Jejak Digital</h1>
+      </div>
+      
+      <p class="subbab-subtitle">
+        Memahami pengertian, jenis, dan dampak jejak digital yang ditinggalkan saat beraktivitas di internet. Pelajari bagaimana melindungi data pribadi dan membangun reputasi digital yang positif.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="content-container">
+      <!-- Pengertian Jejak Digital -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-info-circle"></i> Pengertian Jejak Digital</h3>
+        </div>
+        <div class="content-body">
+            <p class="content-text">
+              Jejak digital atau sering disebut jejak elektronik merupakan jejak data yang ditinggalkan seseorang ketika menggunakan internet. Sama seperti jejak kaki di pasir Pantai Lasiana, setiap klik, like, komentar, atau postingan kita akan meninggalkan bekas di media sosial.
+            </p>
+
+            <p class="content-text">
+              Sebagai contoh ketika kita mengunjungi situs website, mengirimkan email, mengirimkan pesan atau informasi secara online. Semua kegiatan tersebut akan meninggalkan jejak digital, baik disadari maupun tanpa disadari.
+            </p>
+        <div class="digital-trace-layout">
+          <img src="https://cdn.rri.co.id/berita/Banjarmasin/o/1763346528409-bac6c069-04b1-4dvfv107-8027-8dddc55869c0/zwk6waaale8o1fy.jpeg"
+               alt="Ilustrasi Jejak Digital"
+               class="digital-trace-image">
+
+          <div class="digital-trace-text">
+          <p class="content-text">
+            Jejak digital mencakup seluruh aktivitas dan informasi yang kita lakukan di ruang digital, seperti mengunggah video di TikTok, memperbarui status  atau foto profil di Facebook, mengunggah story di Instagram, memberikan komentar pada postingan media online, menulis pesan di WhatsApp, melakukan pencarian, hingga berbelanja secara daring.  Seluruh data yang ditinggalkan ini dapat digunakan untuk melacak aktivitas atau perangkat seseorang secara online. 
+          </p>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jenis-Jenis Jejak Digital -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-layer-group"></i> Jenis-Jenis Jejak Digital</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Secara umum, jejak digital terbagi menjadi dua jenis, yaitu jejak digital aktif dan jejak digital pasif.
+          </p>
+          
+          <div class="two-column">
+            <div class="column-card">
+              <img src="gambar-jejak-aktif.png" alt="Ilustrasi Jejak Digital Aktif" class="column-image">
+              <h4><i class="fas fa-bullhorn"></i> Jejak Digital Aktif</h4>
+              <p class="content-text">
+                Terjadi ketika pengguna dengan sengaja membagikan data atau informasi ke internet.
+              </p>
+              <ul class="content-list">
+                <li>Membuat postingan di Facebook, Instagram, TikTok, YouTube</li>
+                <li>Mengisi formulir online</li>
+                <li>Membagikan lokasi di Maps</li>
+                <li>Mengirim email</li>
+              </ul>
+            </div>
+            
+            <div class="column-card">
+              <img src="gambar-jejak-pasif.png" alt="Ilustrasi Jejak Digital Pasif" class="column-image">
+              <h4><i class="fas fa-user-secret"></i> Jejak Digital Pasif</h4>
+              <p class="content-text">
+                Terjadi ketika pengguna tanpa sadar meninggalkan data saat berselancar di internet.
+              </p>
+              <ul class="content-list">
+                <li>Data kunjungan di media sosial dikumpulkan server</li>
+                <li>Riwayat pencarian dan lokasi</li>
+                <li>Alamat IP dan informasi perangkat</li>
+                <li>Cookies dari situs web yang dikunjungi</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pentingnya Jejak Digital -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-exclamation-triangle"></i> Mengapa Jejak Digital Penting?</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Sebagai masyarakat Nusa Tenggara Timur, kita diajarkan untuk menjaga nama baik keluarga, sekolah dan tempat kita tinggal. Sekarang, nama baik itu juga harus kita jaga di dunia maya, karena jejak digital sangat menentukan masa depan kita.
+          </p>
+          
+          <ul class="content-list">
+            <li>
+              <strong>Potensi Pencurian atau Penyalahgunaan Data:</strong> Ketika data diunggah ke internet, pemilik tidak lagi memiliki kendali penuh atas penggunaannya. Di Kupang, sudah banyak kasus ketika foto yang diunggah ke media sosial seperti Facebook dipakai tanpa izin untuk membuat akun palsu atau melakukan penipuan. Penyalahgunaan identitas dapat berdampak besar karena cepat menyebar dari satu sekolah atau RT ke wilayah yang lebih luas.
+            </li>
+            
+            <li>
+              <strong>Menentukan Reputasi dan Profil Digital:</strong> Reputasi online kini dinilai sama pentingnya dengan reputasi di dunia nyata. Jejak digital dapat memengaruhi kesempatan kalian untuk masuk sekolah unggulan, melanjutkan studi ke universitas, atau lolos seleksi menjadi ASN, TNI, dan Polri, cita-cita yang banyak diimpikan siswa di NTT.  Pada proses seleksi, panitia sering memeriksa media sosial, oleh karena itu, setiap pelajar perlu membangun profil digital yang positif dan bertanggung jawab.
+            </li>
+            
+            <li>
+              <strong>Risiko Disalahartikan atau Diubah:</strong> Unggahan berupa tulisan, foto, atau video dapat dipahami berbeda oleh orang yang berasal dari budaya, logat, atau latar belakang yang beragam. Candaan yang biasa digunakan dalam percakapan sehari-hari bisa dianggap kasar oleh orang di luar komunitas tersebut.
+            </li>
+            
+            <li>
+            <div class="illustration-text">
+              <img src="ilustrasi-ntt-update.png" alt="Ilustrasi penyebaran konten pribadi">
+
+              <p>
+                <strong>Konten Pribadi Dapat Menyebar Luas:</strong>
+                Di NTT, terutama Kota Kupang yang lingkungannya saling terhubung, informasi dapat tersebar sangat cepat.
+                Konten yang awalnya dibagikan dalam grup kelas atau Close Friends dapat berpindah ke grup sekolah lain,
+                komunitas gereja, atau bahkan media lokal. Hal-hal pribadi, pertengkaran, atau aib teman yang kalian bagikan
+                di grup kecil bisa dengan cepat menyebar ke seluruh komunitas siswa di Kupang dan sekitarnya.
+                Jangan sampai viral di NTT Update karena hal-hal negatif.
+              </p>
+            </div>
+          </li>
+
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cara Melindungi Jejak Digital -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-shield-alt"></i> Cara Melindungi Jejak Digital</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+            Karena jejak digital yang ditinggalkan dapat berpotensi membahayakan, kita perlu berhati-hati dan melindungi jejak data digital kita.
+          </p>
+          
+          <ol class="content-list no-dot">
+          <li>
+            Periksa ketersediaan informasi pribadi di internet. Caranya, Anda dapat menggunakan mesin pencari (search engine) untuk memeriksa jejak digital.
+          </li>
+          <li>
+            Hindari berbagi secara berlebihan di media sosial.
+          </li>
+          <li>
+            Menghapus atau menonaktifkan akun media sosial yang jarang digunakan.
+          </li>
+          <li>
+            Jangan klik tautan yang mencurigakan.
+          </li>
+          <li>
+            Hindari situs web yang tidak aman. Untuk memastikan situs web aman atau tidak, periksa apakah situs tersebut menggunakan <strong>https://</strong> atau <strong>http://</strong> tanpa huruf "s". Jika menggunakan "s" atau <strong>https://</strong>, maka situs tersebut aman karena sudah memiliki fitur keamanan di dalamnya.
+          </li>
+          <li>
+            Bangun citra diri yang positif. Jadikan profil kalian sebagai cerminan siswa NTT yang beretika, berprestasi, dan memberikan inspirasi bagi orang lain.
+          </li>
+          <li>
+            Bijak sebelum menulis konten yang akan disebarkan di internet.
+          </li>
+        </ol>
+
+        </div>
+      </div>
+
+      <!-- Interactive Game -->
+       <div class="activity-section animate-fadeIn">
+        <h3 class="activity-title">
+          <i class="fas fa-user-check"></i> Aktivitas Individu: Game Interaktif Risiko Jejak Digital
+        </h3>
+        <div class="interactive-game animate-fadeIn">
+        <p class="content-text">
+          Mainkan game interaktif berikut untuk lebih memahami resiko Jejak Digital dalam menjaga privasi di media sosial.
+        </p>
+        <a href="game-jejak-digital.html" target="_blank" class="game-link">
+          <i class="fas fa-play-circle"></i> Mainkan Game Interaktif
+        </a>
+        <p class="image-caption" style="margin-top: 20px;">Klik link di atas untuk memainkan game interaktif</p>
+      </div>
+      </div>
+
+      <!-- Aktivitas Individu -->
+      <div class="activity-section animate-fadeIn">
+        <h3 class="activity-title">
+          <i class="fas fa-user-check"></i> Aktivitas Individu: Analisis Jejak Digital di Sekitar Kita
+        </h3>
+        
+        <div class="activity-instructions">
+          <h4 style="color: var(--navy-primary); margin-bottom: 15px;">Instruksi:</h4>
+          <p class="content-text">
+            1. Pilih satu (1) platform media sosial yang paling sering kalian gunakan (Instagram, TikTok, atau Facebook) untuk dianalisis.
+          </p>
+          <p class="content-text">
+            2. Aksi yang Harus Kalian Lakukan:
+          </p>
+          <ul class="content-list">
+            <li><strong>Prioritas Konten Pribadi:</strong> Periksa dahulu postingan kalian sendiri. Temukan 2 postingan yang menurut kalian memiliki risiko merusak reputasi (misalnya: berisi keluhan, makian, atau gosip).</li>
+            <li><strong>Jika Tidak Ada Postingan Pribadi:</strong> Jika kalian tidak memiliki postingan sama sekali atau tidak menemukan yang berisiko, gulir beranda (timeline) atau FYP kalian. Temukan 2 postingan milik orang lain yang, jika itu adalah postingan kalian, akan merusak reputasi kalian di masa depan.</li>
+          </ul>
+        </div>
+        
+        <h4 style="color: var(--navy-primary); margin-top: 40px; margin-bottom: 20px;">Tabel Analisis:</h4>
+        <table class="activity-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Sumber Postingan (Pribadi / Beranda)</th>
+              <th>Deskripsi Postingan Berisiko (Garis Besar Konten)</th>
+              <th>Mengapa Postingan Ini Berbahaya bagi Reputasi Kalian?</th>
+              <th>Aksi yang Seharusnya Dilakukan (Hapus/Laporkan/Hindari)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Pribadi</td>
+              <td>____</td>
+              <td>____</td>
+              <td>____</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Beranda</td>
+              <td>____</td>
+              <td>____</td>
+              <td>____</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="nav-buttons">
+        <a href="bab4.html" class="nav-btn nav-btn-prev">
+          <i class="fas fa-arrow-left"></i> Kembali ke Bab 4
+        </a>
+        <a href="bab4-B.html" class="nav-btn nav-btn-next">
+          Lanjut ke Sub Bab B: Media Sosial <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h3>Bahan Ajar Informatika</h3>
+          </div>
+          <p class="footer-description">
+            Platform pembelajaran digital berbasis Kurikulum Merdeka untuk mata pelajaran Informatika SMP Kelas 8
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Menu Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+            <li><a href="bab4.html"><i class="fas fa-chevron-right"></i> Bab 4</a></li>
+            <li><a href="bab5.html"><i class="fas fa-chevron-right"></i> Bab 5</a></li>
+            <li><a href="ujikompetensi.html"><i class="fas fa-chevron-right"></i> Uji Kompetensi</a></li>
+            <li><a href="profilanggi.html"><i class="fas fa-chevron-right"></i> Profil Pengembang</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Kontak Pengembang</h4>
+          <ul class="footer-contact">
+            <li>
+              <i class="fas fa-envelope"></i>
+              <div>anggiclementine02@gmail.com</div>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <div>085804629875</div>
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <div>Kupang, Nusa Tenggara Timur</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Bahan Ajar Digital Informatika by Anggi Clementine. All Rights Reserved.</p>
+        <p class="footer-credit">
+          <i class="fas fa-heart"></i> Dikembangkan untuk <strong>Generasi Digital NTT yang Berbudaya</strong>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeIn');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const animatedElements = document.querySelectorAll('.content-block, .interactive-game, .activity-section');
+      animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+      });
+    });
+
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+
+    if (navMenu.classList.contains("active")) {
+      menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+    } else {
+      menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+    }
+  });
+
+
+     document.querySelectorAll('#navMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profil Pengembang - Bahan Ajar Digital Informatika</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy-primary: #1e3a8a;
+      --navy-secondary: #1e40af;
+      --navy-light: #3b82f6;
+      --navy-accent: #60a5fa;
+      --neutral-dark: #1f2937;
+      --neutral-light: #f8fafc;
+      --neutral-gray: #6b7280;
+      --white: #ffffff;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+      --shadow-3d: 0 25px 50px rgba(30, 58, 138, 0.15);
+      --accent-green: #10b981;
+      --accent-yellow: #f59e0b;
+      --accent-purple: #8b5cf6;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 100%);
+      color: var(--neutral-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* === HEADER === */
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px) saturate(180%);
+      -webkit-backdrop-filter: blur(15px) saturate(180%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    header.scrolled {
+      padding: 12px 40px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.3s ease;
+      text-decoration: none;
+    }
+
+    .logo:hover {
+      transform: translateY(-2px);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--neutral-gray);
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 10px 18px;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.08), transparent);
+      transition: left 0.6s ease;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      color: var(--navy-primary);
+      background: rgba(30, 58, 138, 0.04);
+    }
+
+    nav a.active {
+      color: var(--white);
+      background: var(--navy-primary);
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    /* === MAIN CONTENT === */
+    .profil-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 40px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profil-hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.05) 0%, transparent 70%);
+      top: -200px;
+      right: -200px;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .profil-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      width: 100%;
+      align-items: center;
+    }
+
+    /* === PROFIL IMAGE SECTION === */
+    .profil-image-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .profil-frame {
+      width: 320px;
+      height: 400px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 20px;
+      position: relative;
+      box-shadow: var(--shadow-3d);
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .profil-img-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.8));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--neutral-gray);
+      font-size: 1.1rem;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .profil-img-placeholder i {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      color: var(--navy-light);
+      animation: pulse 3s infinite;
+    }
+
+    .profil-img-upload {
+      margin-top: 25px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      border: 2px dashed var(--navy-light);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .profil-img-upload:hover {
+      background: var(--white);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .profil-img-upload i {
+      color: var(--navy-primary);
+      font-size: 1.2rem;
+    }
+
+    .profil-img-upload span {
+      font-weight: 600;
+      color: var(--navy-primary);
+      font-size: 0.95rem;
+    }
+
+    /* === PROFIL INFO SECTION === */
+    .profil-info {
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .profil-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(59, 130, 246, 0.1));
+      padding: 10px 20px;
+      border-radius: 50px;
+      color: var(--navy-primary);
+      font-weight: 600;
+      margin-bottom: 20px;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .profil-badge i {
+      color: var(--navy-light);
+    }
+
+    .profil-name {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      color: var(--neutral-dark);
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .profil-title {
+      font-size: 1.3rem;
+      color: var(--navy-secondary);
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    .profil-description {
+      font-size: 1.1rem;
+      color: var(--neutral-gray);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      padding-right: 20px;
+    }
+
+    /* === DETAIL SECTIONS === */
+    .profil-details {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .detail-section {
+      margin-bottom: 60px;
+      animation: fadeInUp 0.8s ease-out both;
+    }
+
+    .detail-section:nth-child(1) { animation-delay: 0.1s; }
+    .detail-section:nth-child(2) { animation-delay: 0.2s; }
+    .detail-section:nth-child(3) { animation-delay: 0.3s; }
+    .detail-section:nth-child(4) { animation-delay: 0.4s; }
+    .detail-section:nth-child(5) { animation-delay: 0.5s; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .section-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.2rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--neutral-dark);
+    }
+
+    /* === GRID LAYOUTS === */
+    .grid-2-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .grid-3-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    /* === INFO CARDS === */
+    .info-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(30, 58, 138, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-3d);
+    }
+
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--navy-primary), var(--navy-light));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .info-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .card-icon {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(59, 130, 246, 0.1));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy-primary);
+      font-size: 1.1rem;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--neutral-dark);
+    }
+
+    .card-content {
+      color: var(--neutral-gray);
+      line-height: 1.6;
+    }
+
+    /* === SKILL TAGS === */
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-tag {
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(59, 130, 246, 0.1));
+      color: var(--navy-primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-tag:hover {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .skill-tag i {
+      font-size: 0.8rem;
+    }
+
+    /* === TIMELINE === */
+    .timeline-item {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--navy-primary);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(10px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .timeline-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--neutral-dark);
+    }
+
+    .timeline-period {
+      background: rgba(30, 58, 138, 0.1);
+      color: var(--navy-primary);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .timeline-subtitle {
+      color: var(--navy-secondary);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .timeline-description {
+      color: var(--neutral-gray);
+      line-height: 1.6;
+    }
+
+    /* === CONTACT SECTION === */
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .contact-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-3d);
+    }
+
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(59, 130, 246, 0.1));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy-primary);
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover .contact-icon {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+    }
+
+    .contact-details h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--neutral-dark);
+      margin-bottom: 5px;
+    }
+
+    .contact-details p {
+      color: var(--neutral-gray);
+      font-size: 0.95rem;
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: var(--white);
+      padding: 60px 40px 30px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 60px;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.3rem;
+      transition: transform 0.5s ease;
+    }
+
+    .footer-logo:hover .footer-logo-icon {
+      transform: rotateY(180deg);
+    }
+
+    .footer-logo h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .footer-description {
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      transform-style: preserve-3d;
+    }
+
+    .social-link:hover {
+      background: rgba(59, 130, 246, 0.2);
+      color: var(--navy-light);
+      transform: translateY(-5px) translateZ(5px);
+    }
+
+    .footer-column h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: var(--white);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--navy-light);
+      border-radius: 2px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+      transform: translateX(5px);
+    }
+
+    .footer-links a i {
+      font-size: 0.8rem;
+      color: var(--navy-light);
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+      color: #94a3b8;
+    }
+
+    .footer-contact i {
+      color: var(--navy-light);
+      font-size: 1.2rem;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .footer-credit {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .footer-credit i {
+      color: #ef4444;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    .footer-credit strong {
+      color: var(--navy-light);
+      font-weight: 600;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1024px) {
+      .profil-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .profil-hero {
+        padding: 120px 30px 40px;
+      }
+      
+      .profil-name {
+        font-size: 2.5rem;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+      }
+      
+      .profil-hero {
+        padding: 100px 20px 30px;
+      }
+      
+      .profil-name {
+        font-size: 2rem;
+      }
+      
+      .profil-frame {
+        width: 280px;
+        height: 350px;
+      }
+      
+      .profil-details {
+        padding: 40px 20px;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .grid-2-col, .grid-3-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profil-name {
+        font-size: 1.8rem;
+      }
+      
+      .profil-title {
+        font-size: 1.1rem;
+      }
+      
+      .profil-frame {
+        width: 250px;
+        height: 320px;
+      }
+      
+      .timeline-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+    }
+    
+    .menu-toggle {
+      display: none;
+      margin-left: auto;
+      font-size: 1.6rem;
+      cursor: pointer;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .menu-toggle i {
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        padding: 100px 20px 20px;
+        gap: 10px;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        transition: right 0.4s ease;
+        z-index: 999;
+      }
+
+      nav.active {
+        right: 0;
+      }
+
+      nav a {
+        width: 100%;
+        padding: 14px 18px;
+      }
+    }
+
+    /* === BACK BUTTON === */
+    .back-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.2rem;
+      text-decoration: none;
+      box-shadow: var(--shadow-3d);
+      z-index: 999;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: float 4s infinite ease-in-out;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-10px) scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-laptop-code"></i>
+      </div>
+      <div class="logo-text">Bahan Ajar Informatika</div>
+    </a>
+    
+    <!-- Tombol Hamburger (Mobile) -->
+    <div class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <nav id="navMenu">
+      <a href="index.html">Beranda</a>
+      <a href="index.html#daftar-isi">Daftar Isi</a>
+      <a href="bab4.html">Bab 4</a>
+      <a href="bab5.html">Bab 5</a>
+      <a href="aktivitaspembelajaran.html">Aktivitas</a>
+      <a href="ujikompetensi.html">Uji Kompetensi</a>
+      <a href="profilanggi.html" class="active">Profil Pengembang</a>
+    </nav>
+  </header>
+
+ <!-- Main Content -->
+<main>
+  <!-- Hero Section -->
+  <section class="profil-hero">
+    <div class="profil-container">
+      <!-- Image Section -->
+      <div class="profil-image-section">
+        <div class="profil-frame">
+          <!-- Gambar profil Anggi langsung -->
+          <img src="anggi-photo.png" alt="Foto Anggi Clementine" class="profil-img" style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+          ">
+        </div>
+      </div>
+
+        <!-- Info Section -->
+        <div class="profil-info">
+          <div class="profil-badge">
+            <i class="fas fa-star"></i>
+            <span>Pengembang Bahan Ajar Digital</span>
+          </div>
+          <h1 class="profil-name">Anggi Clementine</h1>
+          <div class="profil-title">Mahasiswa Pendidikan Informatika | Pengembang Konten Digital</div>
+          <p class="profil-description">
+            Seorang mahasiswa program studi Pendidikan Informatika dengan pengalaman praktis di bidang pengembangan bisnis, penjualan, dan komunikasi klien. Berpengalaman sebagai Business Development Intern, Account Executive, dan Sales Development Representative di perusahaan lokal maupun internasional. Memiliki kemampuan teknis dalam pemrograman, alat kreatif, serta manajemen administrasi dan CRM.
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fas fa-code"></i> HTML/CSS/JS</span>
+            <span class="skill-tag"><i class="fas fa-chart-line"></i> Business Development</span>
+            <span class="skill-tag"><i class="fas fa-paint-brush"></i> Desain Grafis</span>
+            <span class="skill-tag"><i class="fas fa-users"></i> Manajemen Tim</span>
+            <span class="skill-tag"><i class="fas fa-globe"></i> Bahasa Inggris</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Details Sections -->
+    <section class="profil-details">
+      <!-- Pendidikan -->
+      <div class="detail-section">
+        <div class="section-header">
+          <div class="section-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h2 class="section-title">Pendidikan</h2>
+        </div>
+        <div class="grid-2-col">
+          <div class="info-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <i class="fas fa-university"></i>
+              </div>
+              <h3 class="card-title">Universitas Citra Bangsa</h3>
+            </div>
+            <div class="card-content">
+              <p><strong>S1 Pendidikan Informatika</strong></p>
+              <p>IPK: 3.90/4.00</p>
+              <p>Fokus pada pendidikan berbasis teknologi dan pengembangan bahan ajar digital.</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <i class="fas fa-school"></i>
+              </div>
+              <h3 class="card-title">SMAN 1 Bajawa</h3>
+            </div>
+            <div class="card-content">
+              <p><strong>Jurusan IPA</strong></p>
+              <p>Lulus dengan prestasi akademik yang sangat baik</p>
+              <p>Aktif dalam berbagai organisasi dan kegiatan ekstrakurikuler.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pengalaman Kerja -->
+      <div class="detail-section">
+        <div class="section-header">
+          <div class="section-icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h2 class="section-title">Pengalaman Kerja & Magang</h2>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <h3 class="timeline-title">Business Development Intern</h3>
+              <span class="timeline-period">Jan 2025 - Mei 2025</span>
+            </div>
+            <p class="timeline-subtitle">GAO Tek Inc., United States | Remote</p>
+            <p class="timeline-description">Mencapai 100+ perusahaan target per minggu melalui email marketing, melakukan riset pasar, dan berkomunikasi dengan 20 calon klien per hari. Mendapat penghargaan Best Intern of the Week.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <h3 class="timeline-title">Account Executive Intern</h3>
+              <span class="timeline-period">Nov 2025 - Sekarang</span>
+            </div>
+            <p class="timeline-subtitle">Kerneels Creative, Jakarta | Remote</p>
+            <p class="timeline-description">Mendukung prospek klien dan koordinasi proyek pemasaran digital. Berhasil menutup 1 deal dari 2 perusahaan yang dipresentasikan.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <h3 class="timeline-title">Team Lead Business Development Intern</h3>
+              <span class="timeline-period">Jun 2024 - Sekarang</span>
+            </div>
+            <p class="timeline-subtitle">Jobfit Indonesia | Remote</p>
+            <p class="timeline-description">Memimpin tim BD, menyusun SOP, dan mengembangkan strategi akuisisi klien. Membangun database klien dan berkolaborasi dengan tim lintas fungsi.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <h3 class="timeline-title">Independent Reseller</h3>
+              <span class="timeline-period">2023 - 2024</span>
+            </div>
+            <p class="timeline-subtitle">Online Shop Fashion & Aksesoris</p>
+            <p class="timeline-description">Menghasilkan Rp10 juta dalam 4 bulan tanpa pengalaman sebelumnya. Mengelola seluruh siklus penjualan, logistik, dan kampanye digital.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keterampilan -->
+      <div class="detail-section">
+        <div class="section-header">
+          <div class="section-icon">
+            <i class="fas fa-tools"></i>
+          </div>
+          <h2 class="section-title">Keterampilan</h2>
+        </div>
+        <div class="grid-3-col">
+          <div class="info-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <i class="fas fa-code"></i>
+              </div>
+              <h3 class="card-title">Teknis</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">C++</span>
+              <span class="skill-tag">HTML/CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Adobe Photoshop</span>
+              <span class="skill-tag">Canva</span>
+              <span class="skill-tag">Microsoft Excel</span>
+              <span class="skill-tag">CRM Tools</span>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3 class="card-title">Bisnis & Pemasaran</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Business Development</span>
+              <span class="skill-tag">Sales Prospecting</span>
+              <span class="skill-tag">Digital Marketing</span>
+              <span class="skill-tag">Market Research</span>
+              <span class="skill-tag">Customer Engagement</span>
+              <span class="skill-tag">Pricing Strategies</span>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3 class="card-title">Soft Skills</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Komunikasi</span>
+              <span class="skill-tag">Kepemimpinan</span>
+              <span class="skill-tag">Manajemen Waktu</span>
+              <span class="skill-tag">Problem Solving</span>
+              <span class="skill-tag">Adaptabilitas</span>
+              <span class="skill-tag">Kerja Tim</span>
+              <span class="skill-tag">Organisasi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Organisasi -->
+      <div class="detail-section">
+        <div class="section-header">
+          <div class="section-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h2 class="section-title">Pengalaman Organisasi</h2>
+        </div>
+        <div class="grid-2-col">
+          <div class="info-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <i class="fas fa-landmark"></i>
+              </div>
+              <h3 class="card-title">Treasurer - HMPS</h3>
+            </div>
+            <div class="card-content">
+              <p><strong>Himpunan Mahasiswa Program Studi</strong></p>
+              <p>Nov 2025 - Sekarang</p>
+              <p>Bertanggung jawab atas seluruh proses keuangan organisasi dari budgeting hingga pelaporan keuangan.</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <i class="fas fa-bullhorn"></i>
+              </div>
+              <h3 class="card-title">Anggota BEM</h3>
+            </div>
+            <div class="card-content">
+              <p><strong>Badan Eksekutif Mahasiswa</strong></p>
+              <p>Nov 2024 - Nov 2025</p>
+              <p>Divisi Komunikasi dan Informasi, membuat materi promosi dan banner menggunakan Canva.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+    </section>
+  </main>
+
+  <!-- Back to Top Button -->
+  <a href="#" class="back-btn" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h3>Bahan Ajar Informatika</h3>
+          </div>
+          <p class="footer-description">
+            Platform pembelajaran digital berbasis Kurikulum Merdeka untuk mata pelajaran Informatika SMP Kelas 8
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Menu Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+            <li><a href="index.html#daftar-isi"><i class="fas fa-chevron-right"></i> Daftar Isi</a></li>
+            <li><a href="bab4.html"><i class="fas fa-chevron-right"></i> Bab 4</a></li>
+            <li><a href="bab5.html"><i class="fas fa-chevron-right"></i> Bab 5</a></li>
+            <li><a href="profilanggi.html"><i class="fas fa-chevron-right"></i> Profil Pengembang</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Kontak Pengembang</h4>
+          <ul class="footer-contact">
+            <li>
+              <i class="fas fa-user"></i>
+              <div>Anggi Clementine</div>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <div>anggiclementine02@gmail.com</div>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <div>085804629875</div>
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <div>Kupang, Nusa Tenggara Timur</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Bahan Ajar Digital Informatika by Anggi Clementine. All Rights Reserved.</p>
+        <p class="footer-credit">
+          <i class="fas fa-heart"></i> Dikembangkan untuk <strong>Generasi Digital NTT yang Berbudaya</strong>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    menuToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+
+      if (navMenu.classList.contains("active")) {
+        menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+      } else {
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      }
+    });
+
+    // Close menu when clicking on links
+    document.querySelectorAll('#navMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+
+    // Back to top button
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTopBtn.style.display = 'flex';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+
+    backToTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Image upload simulation
+    const uploadTrigger = document.getElementById('uploadTrigger');
+    const imgPlaceholder = document.querySelector('.profil-img-placeholder');
+    
+    uploadTrigger.addEventListener('click', () => {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
+      
+      fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            imgPlaceholder.innerHTML = '';
+            imgPlaceholder.style.backgroundImage = `url(${event.target.result})`;
+            imgPlaceholder.style.backgroundSize = 'cover';
+            imgPlaceholder.style.backgroundPosition = 'center';
+            imgPlaceholder.style.color = 'transparent';
+          };
+          reader.readAsDataURL(file);
+          
+          // Show success message
+          alert('Foto profil berhasil diunggah!');
+        }
+      });
+      
+      fileInput.click();
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#' || targetId === '#!') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          e.preventDefault();
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const animatedElements = document.querySelectorAll('.detail-section, .info-card, .timeline-item');
+      animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+    });
+
+    // Demo alert for contact links
+    document.querySelectorAll('.contact-card[href^="mailto"], .contact-card[href^="tel"]').forEach(card => {
+      card.addEventListener('click', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        const type = href.startsWith('mailto') ? 'Email' : 'Telepon';
+        alert(`Ini adalah demo. Dalam aplikasi nyata, ini akan membuka aplikasi ${type} dengan alamat:\n\n${href.split(':')[1]}`);
+      });
+    });
+  </script>
+</body>
+</html>

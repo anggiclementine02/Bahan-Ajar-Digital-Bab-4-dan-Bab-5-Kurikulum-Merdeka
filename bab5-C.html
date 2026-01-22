@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central Processing Unit (CPU) - Bab 5: Pemanfaatan Perangkat Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --navy-primary: #1e3a8a;
+      --navy-secondary: #1e40af;
+      --navy-light: #3b82f6;
+      --navy-accent: #60a5fa;
+      --neutral-dark: #1f2937;
+      --neutral-light: #f8fafc;
+      --neutral-gray: #6b7280;
+      --white: #ffffff;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+      --shadow-3d: 0 25px 50px rgba(30, 58, 138, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--neutral-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* === HEADER === */
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px) saturate(180%);
+      -webkit-backdrop-filter: blur(15px) saturate(180%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    header.scrolled {
+      padding: 12px 40px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: translateY(-2px);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--neutral-gray);
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 10px 18px;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.08), transparent);
+      transition: left 0.6s ease;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      color: var(--navy-primary);
+      background: rgba(30, 58, 138, 0.04);
+    }
+
+    nav a.active {
+      color: var(--white);
+      background: var(--navy-primary);
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    /* === HAMBURGER MENU === */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--navy-primary);
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    .hamburger:hover {
+      background: rgba(30, 58, 138, 0.1);
+    }
+
+    /* Overlay dan close button default hidden */
+    .nav-overlay,
+    .close-menu {
+      display: none;
+    }
+
+    /* === HERO SECTION === */
+    .hero-sub {
+      min-height: 40vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 40px 40px;
+      background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 50%, #dbeafe 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-sub::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.05) 0%, transparent 70%);
+      top: -150px;
+      right: -100px;
+    }
+
+    .hero-sub::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .hero-content-sub {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy-primary);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: rgba(30, 58, 138, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(30, 58, 138, 0.12);
+      transform: translateX(-5px);
+    }
+
+    .subbab-header {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .subbab-header-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 2.2rem;
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+    }
+
+    .subbab-header-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      line-height: 1.1;
+    }
+
+    .subbab-subtitle {
+      font-size: 1.3rem;
+      color: var(--neutral-gray);
+      max-width: 800px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    /* === CONTENT SECTIONS === */
+    .section {
+      padding: 60px 40px;
+      position: relative;
+    }
+
+    .content-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* === CONTENT BLOCK === */
+    .content-block {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .content-block:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .content-header {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      padding: 25px 40px;
+      position: relative;
+    }
+
+    .content-header h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .content-body {
+      padding: 40px;
+    }
+
+    .content-text {
+      font-size: 1.1rem;
+      color: var(--neutral-dark);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .content-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .content-text strong {
+      color: var(--navy-primary);
+      font-weight: 600;
+    }
+
+    .content-text strong.emphasis {
+      font-size: 1.05em;          /* naik dikit aja */
+      color: #0f1f3d;             /* navy lebih dark */
+      font-weight: 700;
+    }
+
+    ol.content-text {
+      list-style-position: inside;
+      padding-left: 0;
+    }
+
+
+    /* === IMAGE CONTAINER === */
+    .image-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .content-image {
+      max-width: 100%;
+      max-height: 400px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-bottom: 15px;
+      object-fit: contain;
+    }
+
+    .content-image:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-3d);
+    }
+
+    .image-caption {
+      font-style: italic;
+      color: var(--neutral-gray);
+      margin-top: 0px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+      /* Layout gambar samping teks  */
+    .digital-layout {
+      display: flex;
+      gap: 25px;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
+
+    /* Gambar ilustrasi kecil */
+    .digital-image {
+      width: 320px;
+      height: auto;
+      border-radius: 14px;
+      flex-shrink: 0;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.15);
+    }
+    .digital-image-large {
+      width: 575px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+    }
+
+
+    /* Teks */
+    .digital-text {
+      flex: 1;
+    }
+
+    /* Responsive HP */
+    @media (max-width: 768px) {
+      .digital-layout {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .digital-image {
+        width: 500px;
+        margin-bottom: 15px;
+      }
+    }
+
+    .digital-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .digital-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+      text-align: center; 
+    }
+
+    .digital-card-image {
+      width: 100%;
+      max-width: 300px;
+      height: 240px;              /* kunci tinggi biar seragam */
+      object-fit: contain;        /* gambar tetap proporsional */
+      margin: 0 auto 12px;
+      display: block;
+
+      border: 1.5px solid #dbe2f1; /* border soft */
+      border-radius: 12px;
+      padding: 8px;              
+      background: #ffffff;
+    }
+
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .digital-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* === TABLE STYLES === */
+    .table-container {
+      overflow-x: auto;
+      margin: 30px 0;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .cpu-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    .cpu-table th {
+      background: linear-gradient(to top, #f9cb9c, #ffe6c9);
+      color: var(--navy-primary);
+      padding: 15px;
+      text-align: center;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 255);
+    }
+
+    .cpu-table td {
+      padding: 12px 15px;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      text-align: center;
+    }
+
+    .cpu-table tr:nth-child(even) {
+      background: rgba(30, 58, 138, 0.03);
+    }
+
+    .cpu-table tr:hover {
+      background: rgba(30, 58, 138, 0.08);
+    }
+
+    /* === LIST STYLES === */
+    .content-list {
+      list-style: none;
+      margin: 25px 0;
+    }
+
+    .content-list li {
+      padding: 12px 0 12px 35px;
+      position: relative;
+      border-bottom: 1px solid rgba(30, 58, 138, 0.05);
+    }
+
+    .content-list li:last-child {
+      border-bottom: none;
+    }
+
+    .content-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 18px;
+      width: 8px;
+      height: 8px;
+      background: var(--navy-light);
+      border-radius: 50%;
+    }
+
+    .content-list strong {
+      color: var(--navy-primary);
+    }
+
+    /* === LOGIC GATE STYLES === */
+    .gate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+      margin: 30px 0;
+    }
+
+    .gate-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      text-align: center;
+    }
+
+    .gate-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .gate-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.8rem;
+      margin: 0 auto 20px;
+      box-shadow: 0 5px 15px rgba(30, 58, 138, 0.2);
+    }
+
+    .gate-card h4 {
+      font-size: 1.3rem;
+      color: var(--navy-primary);
+      margin-bottom: 15px;
+    }
+
+    .gate-symbol {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--neutral-dark);
+      margin: 15px 0;
+      background: rgba(30, 58, 138, 0.05);
+      padding: 10px;
+      border-radius: 8px;
+      font-family: monospace;
+    }
+
+    /* === ACTIVITY SECTION === */
+    .activity-section {
+      background: linear-gradient(135deg, #f0f5ff, #e6f0ff);
+      padding: 60px 40px;
+      border-radius: 20px;
+      margin: 0px 0;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .activity-title {
+      font-size: 1.6rem;
+      color: var(--navy-primary);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .activity-instructions {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+    }
+
+
+    .activity-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .activity-table th {
+      background: linear-gradient(to top, #f9cb9c, #ffe6c9);
+      color: var(--navy-primary);
+      padding: 12px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 255);
+    }
+
+    .activity-table td {
+      padding: 12px;
+      border: 1px solid rgba(30, 58, 138, 0.1);
+      text-align: center;
+    }
+
+    .activity-table input {
+      width: 60px;
+      padding: 8px;
+      border: 1px solid rgba(30, 58, 138, 0.2);
+      border-radius: 6px;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .activity-table input:focus {
+      outline: none;
+      border-color: var(--navy-light);
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+    }
+
+    .check-button {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .check-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+    }
+
+    .result-message {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: 600;
+      display: none;
+    }
+
+    .result-message.success {
+      background: rgba(34, 197, 94, 0.1);
+      color: #16a34a;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .result-message.error {
+      background: rgba(239, 68, 68, 0.1);
+      color: #dc2626;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* === NAVIGATION BUTTONS === */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(30, 58, 138, 0.1);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 35px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow);
+    }
+
+    .nav-btn-prev {
+      background: var(--white);
+      color: var(--navy-primary);
+      border: 2px solid rgba(30, 58, 138, 0.2);
+    }
+
+    .nav-btn-next {
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      color: var(--white);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: var(--white);
+      padding: 60px 40px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy-primary), var(--navy-light));
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--navy-primary), var(--navy-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.3rem;
+      transition: transform 0.5s ease;
+    }
+
+    .footer-logo:hover .footer-logo-icon {
+      transform: rotateY(180deg);
+    }
+
+    .footer-logo h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .footer-description {
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      transform-style: preserve-3d;
+    }
+
+    .social-link:hover {
+      background: rgba(59, 130, 246, 0.2);
+      color: var(--navy-light);
+      transform: translateY(-5px) translateZ(5px);
+    }
+
+    .footer-column h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: var(--white);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--navy-light);
+      border-radius: 2px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+      transform: translateX(5px);
+    }
+
+    .footer-links a i {
+      font-size: 0.8rem;
+      color: var(--navy-light);
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+      color: #94a3b8;
+    }
+
+    .footer-contact i {
+      color: var(--navy-light);
+      font-size: 1.2rem;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .footer-credit {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .footer-credit i {
+      color: #ef4444;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    .footer-credit strong {
+      color: var(--navy-light);
+      font-weight: 600;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1024px) {
+      .subbab-header-title {
+        font-size: 2.4rem;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .gate-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+      }
+      
+      .logo {
+        flex: 1;
+      }
+      
+      .hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 30px 30px;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        overflow-y: auto;
+        gap: 5px;
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 5px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      
+      .logo-text {
+        font-size: 1.1rem;
+      }
+      
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      
+      .hero-sub {
+        padding: 120px 20px 30px;
+      }
+      
+      .section {
+        padding: 40px 20px;
+      }
+      
+      .content-body {
+        padding: 30px 20px;
+      }
+      
+      .nav-buttons {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .nav-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      /* Overlay untuk menu mobile */
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      /* Close button di dalam menu mobile */
+      .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--navy-primary);
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        z-index: 1001;
+      }
+      
+      .close-menu:hover {
+        background: rgba(30, 58, 138, 0.1);
+      }
+      
+      .subbab-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+      
+      .gate-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .activity-section {
+        padding: 30px 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .subbab-header-title {
+        font-size: 1.8rem;
+      }
+      
+      .subbab-header-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+      }
+      
+      .content-header h3 {
+        font-size: 1.3rem;
+      }
+      
+      .gate-card {
+        padding: 20px;
+      }
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    .animate-fadeIn {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-microchip"></i>
+      </div>
+      <div class="logo-text">Bab 5 Pemanfaatan Perangkat Digital</div>
+    </div>
+    
+    <!-- Hamburger Button -->
+    <button class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <nav id="nav-menu">
+      <a href="index.html">Beranda</a>
+      <a href="bab4.html">Bab 4</a>
+      <a href="bab5.html" class="active">Bab 5</a>
+      <a href="ujikompetensi.html">Uji Kompetensi</a>
+      <a href="profilanggi.html">Profil Pengembang</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-sub">
+    <div class="hero-content-sub">
+      
+      <div class="subbab-header">
+        <div class="subbab-header-icon">
+          <i class="fas fa-brain"></i>
+        </div>
+        <h1 class="subbab-header-title">Sub Bab C: Central Processing Unit (CPU)</h1>
+      </div>
+      
+      <p class="subbab-subtitle">
+        Memahami otak komputer: struktur, fungsi, dan cara kerja CPU dalam memproses data dan instruksi.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="content-container">
+      <!-- Pengantar CPU -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-info-circle"></i> Pengantar: Central Processing Unit</h3>
+        </div>
+        <div class="content-body">
+          <p class="content-text">
+          <strong>Central Processing Unit (CPU)</strong> adalah otak dari sebuah komputer yang berisi semua sirkuit yang dibutuhkan untuk memproses input, menyimpan data, dan menghasilkan output.
+        </p>
+
+        <p class="content-text">
+          Berikut adalah tiga peran utama CPU:
+        </p>
+
+        <ol class="content-list">
+
+          <li>
+            <strong>Memproses Input:</strong>
+            CPU menerima instruksi dari perangkat lunak atau perangkat keras (seperti klik mouse atau ketikan keyboard), lalu melakukan perhitungan aritmatika dan logika yang diperlukan.
+          </li>
+          <li>
+            <strong>Menyimpan Data (Sementara):</strong>
+            Melalui unit penyimpanan kecil di dalamnya yang disebut <em>register</em>, CPU menyimpan data yang sedang diproses dengan sangat cepat sebelum dikirim ke memori utama (RAM).
+          </li>
+          <li>
+            <strong>Menghasilkan Output:</strong>
+            Setelah data diproses, CPU mengirimkan hasilnya ke perangkat keluaran seperti monitor, printer, atau menyimpannya kembali ke media penyimpanan (Harddisk/SSD).
+          </li>
+        </ol>
+
+          
+    <div class="digital-layout">
+      <div>
+        <img src="ilustrasiCPU.png"
+             alt="Ilustrasi CPU"
+             class="digital-image-large">
+      </div>
+      <div class="digital-text">
+        <p class="content-text">
+          Bayangkan <span class="highlight">CPU</span> adalah seorang tamu yang membawa
+          <span class="highlight">alamat logika</span> sebagai "nomor tiket" untuk mengambil barang,
+          lalu ia memberikan tiket tersebut kepada
+          <span class="highlight">MMU (Memory Management Unit)</span> yang bertugas sebagai resepsionis;
+          MMU kemudian menerjemahkan nomor tiket itu menjadi
+          <span class="highlight">alamat fisik</span> atau nomor rak penyimpanan yang sebenarnya
+          di dalam gudang <span class="highlight">Memori</span> agar data yang dicari bisa ditemukan dengan tepat.
+        </p>
+      </div>
+    </div>
+
+          <p class="content-text">
+            Alamat yang dibangkitkan oleh CPU disebut alamat logika (<em>logical address</em>) dimana alamat terlihat sebagai <em>unit memory</em> yang disebut alamat fisik (<em>physical address</em>). Tujuan utama manajemen memori adalah konsep meletakkan ruang alamat logika ke ruang alamat fisik. Dengan MMU (<strong>Memory Management Unit</strong>) menempatkan alamat memori atau alamat logika ke alamat fisik dimana pada alamat tersebut sebagai tempat data yang tersimpan.
+          </p>
+          
+          <p class="content-text">
+            <strong>Contoh:</strong> Alamat memori 0001:000B, data yang tersimpan 17 maka alamat fisiknya adalah 0001 + 000B = 000C.
+          </p>
+          
+          <div class="table-container">
+            <table class="cpu-table">
+              <thead>
+                <tr>
+                  <th colspan="2">Alamat Memori/Logika</th>
+                  <th rowspan = "2" > Alamat Fisik</th>
+                  <th rowspan = "2">Data Yang Tersimpan</th>
+                </tr>
+                <tr>
+                  <th>Segmen</th>
+                  <th>Offset</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0001</td>
+                  <td>000B</td>
+                  <td>000C</td>
+                  <td>17</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="content-text">
+            CPU sendiri memiliki beberapa lapisan (<em>layer</em>) yang bisa divisualisasikan seperti pada gambar di bawah. Gerbang sirkuit dan logika merupakan bentuk abstraksi dalam pengaturan operasi dari CPU, sedangkan <em>chip</em> merupakan bentuk fisiknya.
+          </p>
+          
+        <div class="digital-layout">
+      <img src="layerCPU.png"
+           alt="Layer Pada CPU"
+           class="digital-image">
+
+      <div class="digital-text">
+        <p class="content-text">
+          Secara sederhana, CPU bekerja seperti kumpulan jutaan saklar listrik kecil
+          yang disebut <strong>gerbang logika</strong>. Komputer tidak mengerti angka
+          seperti manusia, melainkan hanya mengenal sinyal "nyala" (1) dan "mati" (0).
+          Saat melakukan perhitungan, CPU mengambil dua sinyal biner tersebut,
+          mengolahnya melalui kombinasi saklar yang rumit, dan menghasilkan jawaban
+          kilat yang kemudian kita lihat sebagai hasil perhitungan di layar.
+        </p>
+      </div>
+    </div>     
+
+          <p class="content-text">
+            Secara sederhana, CPU bekerja seperti kumpulan jutaan saklar listrik kecil yang disebut <strong>gerbang logika</strong>. Komputer tidak mengerti angka seperti manusia, melainkan hanya mengenal sinyal "menyala" (1) dan "mati" (0). Saat melakukan perhitungan, CPU mengambil dua sinyal biner tersebut, mengolahnya melalui kombinasi saklar yang rumit, dan menghasilkan jawaban kilat yang kemudian kita lihat sebagai hasil perhitungan di layar.
+          </p>
+          
+          <p class="content-text">
+          <strong>Contoh beberapa pemanfaatan sistem digital yang menggunakan penerapan rangkaian gerbang logika:</strong>
+        </p>
+       <div class="digital-grid">
+
+  <!-- Card 1 -->
+  <div class="digital-card">
+    
+
+    <p class="content-text">
+      <strong class="emphasis">1. Lampu Jalan Otomatis</strong><br>
+     Lampu jalan yang menyala sendiri saat malam hari merupakan contoh sederhana
+      penerapan <strong>gerbang NOT (Inverter)</strong>.
+    </p>
+
+    <p class="content-text">
+      Logika: Jika ada cahaya (1), maka lampu mati (0). Jika TIDAK ada cahaya (0), maka lampu menyala (1).
+      <br> Gerbang NOT membalikkan input gelap menjadi output nyala.
+    </p>
+
+    <img src="https://sc04.alicdn.com/kf/Hd63c1359431844cfafd8ec816afffb1am.jpg" class="digital-card-image" alt="Lampu Jalan Otomatis">
+  </div>
+
+  <!-- Card 2 -->
+  <div class="digital-card">
+
+    <p class="content-text">
+       <strong class="emphasis">2. Sistem Keamanan Brankas (Sistem PIN)</strong><br>
+      Brankas digital untuk memverifikasi identitas pengguna merupakan contoh sederhana
+      penerapan  <strong> gerbang AND</strong>
+    </p>
+    <p class="content-text">
+      Logika: Jika angka pertama benar AND angka kedua benar AND angka ketiga benar, maka kunci terbuka. <br> Jika salah satu angka salah (0), maka hasil akhirnya adalah (0) dan pintu tetap terkunci.
+    </p>
+     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL7mVr4ZjslK8teWp_kgLht3Ay9_vFlPsqig&s" class="digital-card-image" alt="Brankas Digital">
+  </div>
+
+  <!-- Card 3 -->
+  <div class="digital-card">
+    <p class="content-text">
+      <strong>3. Mesin Cuci Otomatis</strong><br>
+      Mesin cuci menggunakan kombinasi gerbang AND dan NOT untuk mengatur siklusnya. 
+    </p>
+
+    <p class="content-text">Logika Sensor Air: Jika level air sudah penuh AND pintu mesin sudah tertutup, maka motor pemutar boleh mulai bekerja.
+    <br> Logika Keamanan: Jika pintu dibuka saat mesin berputar, maka mesin harus segera berhenti.
+    </p>
+    <img src="https://www.ufoelektronika.com/image/cache/catalog/Washer/Sharp-Mesin-Cuci-Front-Loading-7-Kg-ESFL1073W-1000x1000.jpg" class="digital-card-image" alt="Mesin Cuci Otomatis">
+
+  </div>
+
+  <!-- Card 4 -->
+  <div class="digital-card">
+    
+    <p class="content-text">
+      <strong>4. Lift (Elevator)</strong><br>
+      Lift bekerja berdasarkan logika prioritas dan urutan. Menggunakan kombinasi OR, AND, dan NOT.
+    </p>
+
+    <p class="content-text">
+     Logika Operasional : Jika tombol lantai 5 ditekan OR tombol lantai 3 ditekan, maka lift akan bergerak.
+        <br> Logika Keamanan: Jangan gerakkan lift jika beban melebihi kapasitas ATAU pintu masih terbuka.
+    </p>
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9AvEXYmQafnEbYhJ0rhlaM34GG_u0KyR8CeBBOBh2YWZGf99a9IJxMwukaFC85Ad_-r40JnGZUjVY1nwTyygrkz5wogsXubKrTljZ-a3nObyLvgDV0Hvr_TeTK9-Io3ltFcoRUjj6wmYXVcxgV-0nBxx20dlkIGSGPnIgGb7uqvKkhXfc9mJSB4hs/s1500/lift%20pada%20bangunan.webp" class="digital-card-image" alt="Lift Elevator">
+  </div>
+</div>
+    <div class="content-text"> <br>
+          <p class="content-text">
+            Oleh karena itu, kita perlu mengetahui bagaimana gerbang logika bekerja. Gerbang logika terdiri dari tujuh jenis yaitu OR, NOR, AND, NAND, XOR, XNOR, dan NOT seperti ditunjukan pada Gambar dibawah beserta tabel logikanya yang ditunjukan pada Tabel.
+          </p>
+          <div class="image-container">
+            <img src="gerbanglogika.png"class="content-image">
+            <p class="image-caption">Gambar Berbagai Jenis Gerbang Logika</p>
+          </div>
+          
+          <div class="table-container">
+            <table class="cpu-table">
+              <thead>
+                <tr>
+                  <th>Input 1</th>
+                  <th>Input 2</th>
+                  <th>OR</th>
+                  <th>NOR</th>
+                  <th>AND</th>
+                  <th>NAND</th>
+                  <th>XOR</th>
+                  <th>XNOR</th>
+                  <th>NOT(Input 1)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="image-caption" style="text-align: center; margin-top: 10px;">Tabel 5.7 Tabel Logika</p>
+          </div>
+           </p>
+
+           <div class="content-text"> <br>
+          <p class="content-text">
+           Seperti disebutkan sebelumnya, kalian bisa menggabungkan beberapa gerbang logika untuk membentuk sebuah sirkuit. Sebagai contoh, Gambar dibawah ialah sirkuit yang terdiri atas gabungan dua buah gerbang logika yang kemudian diikuti dengan tabel logikanya, yang ditunjukan pada Tabel di bawah.
+          </p>
+
+          <div class="image-container">
+            <img src="sirkuit-2gerbanglogika.png" 
+                 alt="Contoh Sirkuit dengan Dua Gerbang Logika" class="content-image">
+            <p class="image-caption">Contoh Sirkuit dengan Dua Gerbang Logika</p>
+          </div>
+          
+          <div class="table-container">
+            <table class="cpu-table">
+        <thead>
+          <tr>
+            <th>Kondisi</th>
+            <th>Input A</th>
+            <th>Input B</th>
+            <th>Output X (Sum)</th>
+            <th>Output Y (Carry)</th>
+            <th>Penjelasan Matematika</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pertama</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0 + 0 = 0</td>
+          </tr>
+          <tr>
+            <td>Kedua</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1 + 0 = 1</td>
+          </tr>
+          <tr>
+            <td>Ketiga</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0 + 1 = 1</td>
+          </tr>
+          <tr>
+            <td>Keempat</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1 + 1 = 10 (Biner untuk 2)</td>
+          </tr>
+        </tbody>
+
+            </table>
+            <p class="image-caption" style="text-align: center; margin-top: 10px;">Tabel 5.8 Tabel Logika Berdasarkan Gambar 5.6</p>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+
+      <!-- Gerbang Logika Detail -->
+      <div class="content-block animate-fadeIn">
+        <div class="content-header">
+          <h3><i class="fas fa-sliders-h"></i> Detail Gerbang Logika</h3>
+        </div>
+        <div class="content-body">
+          
+          <!-- Gerbang AND -->
+          <div class="gate-card">
+            <div class="gate-icon">
+              <i class="fas fa-android"></i>
+            </div>
+           <h4>1. Gerbang AND</h4>
+            <div class="digital-layout">
+              <div>
+                <img src="gerbang-AND.png"
+                     alt="Gambar Gerbang AND"
+                     class="digital-image">
+                <p class="image-caption">Gambar Gerbang AND</p>
+              </div>
+
+              <div class="digital-text">
+
+            <p class="content-text">
+              Gerbang AND adalah salah satu gerbang yang dipakai pada konsep kerja ALU
+              (<em>Arithmetic Logic Unit</em>) dimana gerbang AND memiliki 2 masukan dan 1 keluaran.
+            </p>
+                <p class="content-text">
+                  Prinsip kerjanya seperti perkalian dalam matematika.
+                  Jika salah satu input bernilai 0 (rendah), maka <em>output</em> bernilai 0.
+                  Jika semua input bernilai 1 (tinggi), maka <em>output</em> bernilai 1.
+                </p>
+              </div>
+            </div>
+            
+            <div class="table-container">
+              <table class="cpu-table">
+                <thead>
+                  <tr>
+                    <th>A (Input)</th>
+                    <th>B (Input)</th>
+                    <th>Y (Output)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Nyala (1)</td>
+                    <td>Nyala (1)</td>
+                    <td>Terang (1)</td>
+                  </tr>
+                  <tr>
+                    <td>Nyala (1)</td>
+                    <td>Mati (0)</td>
+                    <td>Gelap (0)</td>
+                  </tr>
+                  <tr>
+                    <td>Mati (0)</td>
+                    <td>Nyala (1)</td>
+                    <td>Gelap (0)</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="image-caption" style="text-align: center; margin-top: 10px;">Tabel 5.9 Prinsip Kerja Gerbang AND</p>
+            </div>
+          </div>
+          
+          <!-- Gerbang OR -->
+          <div class="gate-card">
+            <div class="gate-icon">
+              <i class="fas fa-orcid"></i>
+            </div>
+            <h4>1. Gerbang OR</h4>
+            <div class="digital-layout">
+              <div>
+                <img src="gerbang-OR.png"
+                     alt="Gambar Gerbang OR"
+                     class="digital-image">
+                <p class="image-caption">Gambar Gerbang OR</p>
+              </div>
+
+              <div class="digital-text">
+
+            <p class="content-text">Gerbang OR adalah salah satu gerbang dipakai pada konsep kerja ALU (<em>Arithmetic Logic Unit</em>) dimana gerbang OR memiliki 2 masukan dan 1 keluaran.</p>
+            </div>
+            </div>
+            
+            <div class="table-container">
+              <table class="cpu-table">
+                <thead>
+                  <tr>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>Y</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Nyala (1)</td>
+                    <td>Nyala (1)</td>
+                    <td>Terang (1)</td>
+                  </tr>
+                  <tr>
+                    <td>Nyala (1)</td>
+                    <td>Mati (0)</td>
+                    <td>Terang (1)</td>
+                  </tr>
+                  <tr>
+                    <td>Mati (0)</td>
+                    <td>Nyala (1)</td>
+                    <td>Terang (1)</td>
+                  </tr>
+                  <tr>
+                    <td>Mati (0)</td>
+                    <td>Mati (0)</td>
+                    <td>Gelap (0)</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="image-caption" style="text-align: center; margin-top: 10px;">Tabel 5.10 Prinsip Kerja Gerbang OR</p>
+            </div>
+          </div>
+          
+          <!-- Gerbang NOT -->
+          <div class="gate-card">
+            <div class="gate-icon">
+              <i class="fas fa-not-equal"></i>
+            </div>
+            <h4>3. Gerbang NOT</h4>
+            <div class="digital-layout">
+              <div>
+                <img src="gerbang-NOT.png"
+                     alt="Gambar Gerbang NOT"
+                     class="digital-image">
+                <p class="image-caption">Gambar Gerbang NOT</p>
+              </div>
+              <div class="digital-text">
+             <p class="content-text">Gerbang NOT adalah gerbang yang berfungsi sebagai pembalik kondisi, dari input kondisi 1 (tinggi) menjadi <em>output</em> 0 (rendah), demikian juga sebaliknya jika input kondisi 0 (rendah) menjadi <em>output</em> 1 (tinggi).</p>
+
+              </div>
+            </div>
+            
+            
+            <div class="table-container">
+              <table class="cpu-table">
+                <thead>
+                  <tr>
+                    <th>A</th>
+                    <th>Y</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="image-caption" style="text-align: center; margin-top: 10px;">Tabel 5.11 Prinsip Kerja Gerbang NOT</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aktivitas Individu -->
+      <div class="activity-section animate-fadeIn">
+        <h3 class="activity-title">
+          <i class="fas fa-user-check"></i>Aktivitas Individu: Tabel Logika Gerbang Sirkuit
+        </h3>
+            
+            <div class="activity-instructions">
+              <p class="content-text">
+                Lengkapi tabel logika dari gerbang logika berikut:
+              </p>
+              
+              <div class="image-container">
+                <img src="aktivitas-gate-logic.png" 
+                     alt="Diagram Gerbang Logika Aktivitas" class="content-image">
+                <p class="image-caption">Diagram gerbang logika untuk aktivitas individu</p>
+              </div>
+            </div>
+            
+            <div class="table-container">
+              <table class="activity-table">
+               <thead>
+              <tr>
+                <th colspan="4">INPUT</th>
+                <th colspan="3">OUTPUT</th>
+              </tr>
+              <tr>
+                <th>A1</th>
+                <th>A0</th>
+                <th>B1</th>
+                <th>B0</th>
+                <th>C2</th>
+                <th>C1</th>
+                <th>C0</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td><input type="text" id="c2-1" placeholder="?"></td>
+                <td><input type="text" id="c1-1" placeholder="?"></td>
+                <td><input type="text" id="c0-1" placeholder="?"></td>
+              </tr>
+
+              <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td><input type="text" id="c2-2" placeholder="?"></td>
+                <td><input type="text" id="c1-2" placeholder="?"></td>
+                <td><input type="text" id="c0-2" placeholder="?"></td>
+              </tr>
+
+              <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td><input type="text" id="c2-3" placeholder="?"></td>
+                <td><input type="text" id="c1-3" placeholder="?"></td>
+                <td><input type="text" id="c0-3" placeholder="?"></td>
+              </tr>
+
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td><input type="text" id="c2-4" placeholder="?"></td>
+                <td><input type="text" id="c1-4" placeholder="?"></td>
+                <td><input type="text" id="c0-4" placeholder="?"></td>
+              </tr>
+            </tbody>
+
+              </table>
+            </div>
+            
+            <button class="check-button" id="checkAnswers">
+              <i class="fas fa-check-circle"></i> Periksa Jawaban
+            </button>
+            
+            <div class="result-message" id="resultMessage"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="nav-buttons">
+        <a href="bab5-B.html" class="nav-btn nav-btn-prev">
+          <i class="fas fa-arrow-left"></i> Kembali ke Sub Bab B
+        </a>
+        <a href="bab5-D.html" class="nav-btn nav-btn-next">
+          Lanjut ke Sub Bab D <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h3>Bahan Ajar Informatika</h3>
+          </div>
+          <p class="footer-description">
+            Platform pembelajaran digital berbasis Kurikulum Merdeka untuk mata pelajaran Informatika SMP Kelas 8 dengan fokus pada nilai-nilai budaya Nusa Tenggara Timur.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Menu Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+            <li><a href="bab4.html"><i class="fas fa-chevron-right"></i> Bab 4</a></li>
+            <li><a href="bab5.html"><i class="fas fa-chevron-right"></i> Bab 5</a></li>
+            <li><a href="ujikompetensi.html"><i class="fas fa-chevron-right"></i> Uji Kompetensi</a></li>
+            <li><a href="profilanggi.html"><i class="fas fa-chevron-right"></i> Profil Pengembang</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Kontak Pengembang</h4>
+          <ul class="footer-contact">
+            <li>
+              <i class="fas fa-envelope"></i>
+              <div>anggiclementine02@gmail.com</div>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <div>085804629875</div>
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <div>Kupang, Nusa Tenggara Timur</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Bahan Ajar Digital Informatika by Anggi Clementine. All Rights Reserved.</p>
+        <p class="footer-credit">
+          <i class="fas fa-heart"></i> Dikembangkan untuk <strong>Generasi Digital NTT yang Berbudaya</strong>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Hamburger menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('nav-menu');
+      const body = document.body;
+      
+      // Buat overlay element
+      const overlay = document.createElement('div');
+      overlay.className = 'nav-overlay';
+      body.appendChild(overlay);
+      
+      // Buat close button untuk mobile
+      const closeButton = document.createElement('button');
+      closeButton.className = 'close-menu';
+      closeButton.innerHTML = '<i class="fas fa-times"></i>';
+      closeButton.setAttribute('aria-label', 'Tutup menu');
+      navMenu.appendChild(closeButton);
+      
+      // Toggle menu saat hamburger diklik
+      hamburger.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        body.style.overflow = 'hidden';
+      });
+      
+      // Tutup menu saat overlay diklik
+      overlay.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+      });
+      
+      // Tutup menu saat close button diklik
+      closeButton.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+      });
+      
+      // Tutup menu saat link di dalam menu diklik
+      const navLinks = navMenu.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.style.overflow = '';
+        });
+      });
+      
+      // Tutup menu saat window di-resize ke ukuran besar
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.style.overflow = '';
+        }
+      });
+      
+      // Check answers for activity
+      const checkButton = document.getElementById('checkAnswers');
+      const resultMessage = document.getElementById('resultMessage');
+      
+      if (checkButton) {
+        checkButton.addEventListener('click', function() {
+          // Jawaban yang benar (sesuaikan dengan diagram sebenarnya)
+          const correctAnswers = [
+          { c2: '0', c1: '0', c0: '0' },
+          { c2: '0', c1: '1', c0: '0' },
+          { c2: '1', c1: '0', c0: '0' },
+          { c2: '1', c1: '1', c0: '0' }
+         ];
+          
+          let allCorrect = true;
+          let message = '';
+          
+          for (let i = 1; i <= 4; i++) {
+            const userC2 = document.getElementById(`c2-${i}`).value.trim();
+            const userC1 = document.getElementById(`c1-${i}`).value.trim();
+            const userC0 = document.getElementById(`c0-${i}`).value.trim();
+            
+            const correct = correctAnswers[i-1];
+            
+            if (userC2 !== correct.c2 || userC1 !== correct.c1 || userC0 !== correct.c0) {
+              allCorrect = false;
+              break;
+            }
+          }
+          
+          if (allCorrect) {
+            resultMessage.textContent = 'Selamat! Semua jawaban Anda benar!';
+            resultMessage.className = 'result-message success';
+            resultMessage.style.display = 'block';
+          } else {
+            resultMessage.textContent = 'Masih ada jawaban yang salah. Silakan periksa kembali!';
+            resultMessage.className = 'result-message error';
+            resultMessage.style.display = 'block';
+          }
+        });
+      }
+    });
+
+    // Animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeIn');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const animatedElements = document.querySelectorAll('.content-block');
+      animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
